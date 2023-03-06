@@ -10,6 +10,7 @@ public class HotelRepository {
     private List<HotelModel> hotels;
 
     public HotelRepository() {
+
         this.hotels = this.Agregar();
     }
 
@@ -55,7 +56,7 @@ public class HotelRepository {
                 "BG-0004", "Bocagranue", "Cartagena", "Multiple", 9370.0, LocalDate.of(2022, 04, 17), LocalDate.of(2022,06, 12),false
         );
 
-        List<HotelModel> lista = new ArrayList<HotelModel>();
+        List<HotelModel> lista = new ArrayList<>();
 
         lista.add(hotel1);
         lista.add(hotel2);
