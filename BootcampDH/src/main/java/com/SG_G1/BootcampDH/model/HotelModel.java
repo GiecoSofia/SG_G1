@@ -3,7 +3,9 @@ package com.SG_G1.BootcampDH.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.cglib.core.Local;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -16,7 +18,7 @@ public class HotelModel {
     private String place;
     private String type;
     private Double price;
-    private Date from;
-    private Date to;
+    private LocalDate from;
+    private LocalDate to;
     private Boolean booking;
 }
