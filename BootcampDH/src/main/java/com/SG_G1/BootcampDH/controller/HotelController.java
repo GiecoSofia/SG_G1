@@ -1,15 +1,15 @@
 package com.SG_G1.BootcampDH.controller;
 
 
+import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive3;
+import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
 import com.SG_G1.BootcampDH.model.HotelModel;
 import com.SG_G1.BootcampDH.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -30,4 +30,10 @@ public class HotelController {
                                                           @RequestParam String destination){
         return new ResponseEntity<>(hotelService.hotelRepositoryListDisp(dateFrom, dateTo, destination), HttpStatus.OK);
     }
+
+    @PostMapping("/api/v1/booking")
+    public ResponseEntity<DTOresponsive3> booking(@RequestBody DTOresquest3 booking){
+        return new ResponseEntity<>(hotelService.booking(booking), HttpStatus.OK);
+    }
+
 }
