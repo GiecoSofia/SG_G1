@@ -9,7 +9,7 @@ import java.util.List;
 
 public class FlightRepository {
     private List<FlightModel> flights;
-
+    /*
     public FlightRepository(List<FlightModel> flights) {
         this.flights = this.agregar();
 
@@ -17,7 +17,7 @@ public class FlightRepository {
 
     public List<FlightModel> agregar(){
 
-    }
+    }*/
 
     public List<FlightModel> flightList;
 }

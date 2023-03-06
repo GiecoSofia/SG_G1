@@ -3,10 +3,20 @@ package com.SG_G1.BootcampDH.repository;
 import com.SG_G1.BootcampDH.model.HotelModel;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 public class HotelRepository {
     private List<HotelModel> hotels;
+
+    public HotelRepository() {
+        this.hotels = this.Agregar();
+    }
+
+    public List<HotelModel> getHotels() {
+        return hotels;
+    }
+
     public List<HotelModel> Agregar(){
         HotelModel hotel1 = new HotelModel(
                 "CH-0002", "Cataratas Hotel", "Puerto Iguazú", "Doble", 6300.0, LocalDate.of(2022, 02, 10), LocalDate.of(2023, 03, 20), false
@@ -45,7 +55,23 @@ public class HotelRepository {
                 "BG-0004", "Bocagranue", "Cartagena", "Multiple", 9370.0, LocalDate.of(2022, 04, 17), LocalDate.of(2022,06, 12),false
         );
 
+        List<HotelModel> lista = new ArrayList<HotelModel>();
 
+        lista.add(hotel1);
+        lista.add(hotel2);
+        lista.add(hotel3);
+        lista.add(hotel4);
+        lista.add(hotel5);
+        lista.add(hotel6);
+        lista.add(hotel7);
+        lista.add(hotel8);
+        lista.add(hotel9);
+        lista.add(hotel10);
+        lista.add(hotel11);
+        lista.add(hotel12);
+
+
+        return lista;
     }
     public List<HotelModel> hotelList;
 }
