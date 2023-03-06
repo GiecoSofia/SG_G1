@@ -28,6 +28,6 @@ public class HotelController {
     public ResponseEntity<List<HotelModel>> listHotelDips(@RequestParam String dateFrom,
                                                           @RequestParam String dateTo,
                                                           @RequestParam String destination){
-        return new ResponseEntity<>(hotelService.hotelRepositoryListDisp(dateFrom, dateTo, destination), HttpStatus.OK);
+        return new ResponseEntity<>(hotelService.hotelRepositoryListDisp(dateFrom,dateTo, destination), HttpStatus.OK);
     }
 }
