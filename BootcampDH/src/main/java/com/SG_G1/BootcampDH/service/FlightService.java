@@ -1,5 +1,9 @@
 package com.SG_G1.BootcampDH.service;
 
+import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive3;
+import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive6;
+import com.SG_G1.BootcampDH.dto.resquest.DTOrequest6;
+import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
 import com.SG_G1.BootcampDH.model.FlightModel;
 import com.SG_G1.BootcampDH.model.HotelModel;
 import com.SG_G1.BootcampDH.repository.FlightRepository;
@@ -7,9 +11,13 @@ import com.SG_G1.BootcampDH.repository.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -39,6 +47,52 @@ public class FlightService {
             }
         }
         return nuevaLista;
+    }
+
+    public DTOresponsive6 flightReservation(DTOrequest6 flightReservation){
+        DTOresponsive6 responsive = new DTOresponsive6();
+        responsive.setUserName(flightReservation.getUserName());
+
+        double total ;
+
+        ZoneId defaultZoneId = ZoneId.systemDefault();
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+
+        ParsePosition position = new ParsePosition(0);
+        ParsePosition position1 = new ParsePosition(0);
+
+        System.out.println(flightReservation.getFlightReservation().getDateTo());
+        System.out.println(flightReservation.getFlightReservation().getDateFrom());
+
+        Date fechaActual = formato.parse(flightReservation.getFlightReservation().getDateTo(),position);
+
+        Date fechaInicio = formato.parse(flightReservation.getFlightReservation().getDateFrom(),position1);
+
+
+        int dias = (int) ((fechaActual.getTime()-fechaInicio.getTime()) / 86400000);
+
+        FlightRepository flights = new FlightRepository();
+
+        FlightModel flight = new FlightModel();
+
+        for (FlightModel flight1:flights.getFlights()) {
+            System.out.println(flightReservation.getFlightReservation().getFlightNumber());
+            System.out.println(flight1.getCode());
+            if (flightReservation.getFlightReservation().getFlightNumber().equals(flight1.getCode())){
+                flight = flight1;
+            }
+        }
+        System.out.println(flight);
+        total = dias * flight.getPrice();
+
+
+        responsive.setTotal(total);
+
+
+        responsive.setFlightReservation(flightReservation.getFlightReservation());
+
+        return responsive;
     }
 }
 

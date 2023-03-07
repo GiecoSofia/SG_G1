@@ -4,20 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
-import java.util.Date;
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-public class FlightModel {
+import java.util.List;
 
-    private String code;
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class FlightReservationModel {
+
+    private String dateFrom;
+    private String dateTo;
     private String origin;
     private String destination;
+    private String flightNumber;
+    private int seats;
     private String seatType;
-    private Double price;
-    private LocalDate from;
-    private LocalDate to;
-
-
+    private List<PeopleModel> people;
 }
