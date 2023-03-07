@@ -39,7 +39,7 @@ public class HotelService {
 
              dateTo = LocalDate.parse(to,formatter);
         }catch (DateTimeParseException exception){
-            System.out.println("La formato de la fecha es invalido, dd/MM/yyyy ");
+            throw new RuntimeException("La formato de la fecha es invalido, dd/MM/yyyy ");
         }
 
 
@@ -72,7 +72,7 @@ public class HotelService {
              fechaInicio = formato.parse(booking.getBooking().getDateFrom(),position1);
 
          }catch (DateTimeParseException exception){
-             System.out.println("La formato de la fecha es invalido, dd/MM/yyyy ");
+             throw new RuntimeException("La formato de la fecha es invalido, dd/MM/yyyy ");
          }
 
         int dias = (int) ((fechaActual.getTime()-fechaInicio.getTime()) / 86400000);

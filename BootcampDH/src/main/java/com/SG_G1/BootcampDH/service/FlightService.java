@@ -46,7 +46,7 @@ public class FlightService {
 
             dateTo = LocalDate.parse(to,formatter);
         } catch (DateTimeParseException exception) {
-            System.out.println("La formato de la fecha es invalido, dd/MM/yyyy " );
+            throw new RuntimeException("La formato de la fecha es invalido, dd/MM/yyyy ");
         }
         for(FlightModel flight: lista.getFlights()){
             if(destination.equals(flight.getDestination()) && dateFrom.equals(flight.getFrom()) && dateTo.equals(flight.getTo())){
@@ -81,7 +81,7 @@ public class FlightService {
             fechaInicio = formato.parse(flightReservation.getFlightReservation().getDateFrom(),position1);
 
         }catch (DateTimeParseException exception){
-            System.out.println("La formato de la fecha es invalido, dd/MM/yyyy ");
+            throw new RuntimeException("La formato de la fecha es invalido, dd/MM/yyyy ");
         }
 
         int dias = (int) ((fechaActual.getTime()-fechaInicio.getTime()) / 86400000);
