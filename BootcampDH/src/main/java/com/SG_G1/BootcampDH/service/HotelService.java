@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,13 +31,21 @@ public class HotelService {
         List<HotelModel> nuevaLista = new ArrayList<>();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate dateFrom = null;
 
-        LocalDate dateFrom = LocalDate.parse(from,formatter);
+        LocalDate dateTo = null;
+        try {
+             dateFrom = LocalDate.parse(from,formatter);
 
-        LocalDate dateTo = LocalDate.parse(to,formatter);
+             dateTo = LocalDate.parse(to,formatter);
+        }catch (DateTimeParseException exception){
+            System.out.println("La formato de la fecha es invalido, dd/MM/yyyy ");
+        }
+
+
 
         for (HotelModel hotel:lista.getHotels()) {
-            if(destination.equals(hotel.getPlace()) && dateFrom.equals(hotel.getFrom())){
+            if(destination.equals(hotel.getPlace()) && dateFrom.equals(hotel.getFrom()) && dateTo.equals(hotel.getTo())){
                 nuevaLista.add(hotel);
             }
         }
@@ -46,22 +55,25 @@ public class HotelService {
         DTOresponsive3 responsive = new DTOresponsive3();
         responsive.setUserName(booking.getUserName());
 
-
-
         double total ;
-
-        ZoneId defaultZoneId = ZoneId.systemDefault();
 
          SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
          ParsePosition position = new ParsePosition(0);
          ParsePosition position1 = new ParsePosition(0);
 
+         Date fechaActual = null;
 
-        Date fechaActual = formato.parse(booking.getBooking().getDateTo(),position);
+         Date fechaInicio = null;
 
-        Date fechaInicio = formato.parse(booking.getBooking().getDateFrom(),position1);
+         try {
+             fechaActual = formato.parse(booking.getBooking().getDateTo(),position);
 
+             fechaInicio = formato.parse(booking.getBooking().getDateFrom(),position1);
+
+         }catch (DateTimeParseException exception){
+             System.out.println("La formato de la fecha es invalido, dd/MM/yyyy ");
+         }
 
         int dias = (int) ((fechaActual.getTime()-fechaInicio.getTime()) / 86400000);
 

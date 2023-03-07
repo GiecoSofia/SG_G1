@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,10 +38,16 @@ public class FlightService {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-        LocalDate dateFrom = LocalDate.parse(from,formatter);
+        LocalDate dateFrom = null;
 
-        LocalDate dateTo = LocalDate.parse(to,formatter);
+        LocalDate dateTo = null;
+        try {
+            dateFrom = LocalDate.parse(from,formatter);
 
+            dateTo = LocalDate.parse(to,formatter);
+        } catch (DateTimeParseException exception) {
+            System.out.println("La formato de la fecha es invalido, dd/MM/yyyy " );
+        }
         for(FlightModel flight: lista.getFlights()){
             if(destination.equals(flight.getDestination()) && dateFrom.equals(flight.getFrom()) && dateTo.equals(flight.getTo())){
                 nuevaLista.add(flight);
@@ -65,10 +72,17 @@ public class FlightService {
         System.out.println(flightReservation.getFlightReservation().getDateTo());
         System.out.println(flightReservation.getFlightReservation().getDateFrom());
 
-        Date fechaActual = formato.parse(flightReservation.getFlightReservation().getDateTo(),position);
+        Date fechaActual = null;
 
-        Date fechaInicio = formato.parse(flightReservation.getFlightReservation().getDateFrom(),position1);
+        Date fechaInicio = null;
+        try {
+            fechaActual = formato.parse(flightReservation.getFlightReservation().getDateTo(),position);
 
+            fechaInicio = formato.parse(flightReservation.getFlightReservation().getDateFrom(),position1);
+
+        }catch (DateTimeParseException exception){
+            System.out.println("La formato de la fecha es invalido, dd/MM/yyyy ");
+        }
 
         int dias = (int) ((fechaActual.getTime()-fechaInicio.getTime()) / 86400000);
 
