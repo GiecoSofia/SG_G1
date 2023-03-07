@@ -5,6 +5,7 @@ import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive6;
 import com.SG_G1.BootcampDH.dto.resquest.DTOrequest6;
 import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
 import com.SG_G1.BootcampDH.model.FlightModel;
+import com.SG_G1.BootcampDH.model.HotelModel;
 import com.SG_G1.BootcampDH.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,11 @@ public class FlightController {
 
     @GetMapping("/api/v1/flights")
     public ResponseEntity<List<FlightModel>> listFlight(){
-        return new ResponseEntity<>(flightService.flightRepositoryList(), HttpStatus.OK);
+        List<FlightModel> flights = flightService.flightRepositoryList();
+        if(flights.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(flights, HttpStatus.OK);
     }
 
     @GetMapping("/api/v1/flightss")

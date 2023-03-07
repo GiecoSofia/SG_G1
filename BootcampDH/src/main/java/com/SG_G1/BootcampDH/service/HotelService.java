@@ -3,6 +3,7 @@ package com.SG_G1.BootcampDH.service;
 import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive3;
 import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
 import com.SG_G1.BootcampDH.model.HotelModel;
+import com.SG_G1.BootcampDH.model.StatusCode;
 import com.SG_G1.BootcampDH.repository.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
@@ -96,6 +97,8 @@ public class HotelService {
 
 
          responsive.setBooking(booking.getBooking());
+
+         responsive.setStatus(new StatusCode(200,"El proceso termino satisfactoriamente"));
 
          return responsive;
      }

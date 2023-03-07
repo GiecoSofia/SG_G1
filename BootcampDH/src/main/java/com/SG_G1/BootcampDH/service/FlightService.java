@@ -6,9 +6,11 @@ import com.SG_G1.BootcampDH.dto.resquest.DTOrequest6;
 import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
 import com.SG_G1.BootcampDH.model.FlightModel;
 import com.SG_G1.BootcampDH.model.HotelModel;
+import com.SG_G1.BootcampDH.model.StatusCode;
 import com.SG_G1.BootcampDH.repository.FlightRepository;
 import com.SG_G1.BootcampDH.repository.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.text.ParsePosition;
@@ -105,6 +107,8 @@ public class FlightService {
 
 
         responsive.setFlightReservation(flightReservation.getFlightReservation());
+
+        responsive.setStatus(new StatusCode(200,"El proceso termino satisfactoriamente"));
 
         return responsive;
     }

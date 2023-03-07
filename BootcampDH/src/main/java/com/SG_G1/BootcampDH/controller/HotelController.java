@@ -21,7 +21,11 @@ public class HotelController {
 
     @GetMapping("/api/v1/hotels")
     public ResponseEntity<List<HotelModel>> listHotel(){
-        return new ResponseEntity<>(hotelService.hotelRepositoryList(), HttpStatus.OK);
+        List<HotelModel> hoteles = hotelService.hotelRepositoryList();
+        if(hoteles.isEmpty()){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(hoteles, HttpStatus.OK);
     }
 
     @GetMapping ("/api/v1/hotelss")
