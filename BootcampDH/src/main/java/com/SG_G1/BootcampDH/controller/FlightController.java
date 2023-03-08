@@ -24,7 +24,7 @@ public class FlightController {
     public ResponseEntity<List<FlightModel>> listFlight(){
         List<FlightModel> flights = flightService.flightRepositoryList();
         if(flights.isEmpty()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new NullPointerException();
         }
         return new ResponseEntity<>(flights, HttpStatus.OK);
     }
@@ -33,7 +33,14 @@ public class FlightController {
     public ResponseEntity<List<FlightModel>> listFlightDisp(@RequestParam String dateFrom,
                                                             @RequestParam String dateTo,
                                                             @RequestParam String destination){
-        return new ResponseEntity<>(flightService.flightRepositoryListDisp(dateFrom,dateTo,destination), HttpStatus.OK);
+
+        List<FlightModel> flights = flightService.flightRepositoryListDisp(dateFrom,dateTo,destination);
+        if(flights.isEmpty()) {
+            throw new NullPointerException();
+        }
+
+
+        return new ResponseEntity<>(flights, HttpStatus.OK);
     }
 
     @PostMapping("/api/v1/flight-reservation")

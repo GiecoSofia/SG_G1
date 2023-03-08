@@ -23,7 +23,8 @@ public class HotelController {
     public ResponseEntity<List<HotelModel>> listHotel(){
         List<HotelModel> hoteles = hotelService.hotelRepositoryList();
         if(hoteles.isEmpty()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            throw new NullPointerException();
+
         }
         return new ResponseEntity<>(hoteles, HttpStatus.OK);
     }
@@ -32,7 +33,12 @@ public class HotelController {
     public ResponseEntity<List<HotelModel>> listHotelDips(@RequestParam String dateFrom,
                                                           @RequestParam String dateTo,
                                                           @RequestParam String destination){
-        return new ResponseEntity<>(hotelService.hotelRepositoryListDisp(dateFrom,dateTo, destination), HttpStatus.OK);
+        List<HotelModel> hoteles = hotelService.hotelRepositoryListDisp(dateFrom,dateTo, destination);
+        if(hoteles.isEmpty()){
+            throw new NullPointerException();
+
+        }
+        return new ResponseEntity<>(hoteles, HttpStatus.OK);
     }
 
     @PostMapping("/api/v1/booking")

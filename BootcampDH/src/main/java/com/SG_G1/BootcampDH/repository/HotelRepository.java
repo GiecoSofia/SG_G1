@@ -10,8 +10,8 @@ public class HotelRepository {
     private List<HotelModel> hotels;
 
     public HotelRepository() {
-
         this.hotels = this.Agregar();
+        //this.hotels = new ArrayList<>();
     }
 
     public List<HotelModel> getHotels() {

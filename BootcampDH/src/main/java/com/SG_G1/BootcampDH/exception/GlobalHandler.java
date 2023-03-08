@@ -18,9 +18,8 @@ public class GlobalHandler {
     public ResponseEntity<String> handlerRuntime(HttpMessageNotReadableException exception){
         return new ResponseEntity<>("El json no esta mandodado de manera corrrecta", HttpStatus.BAD_REQUEST);
     }
-    /*
-    @ExceptionHandler(SinBlogsException.class)
-    public ResponseEntity<String> handlerRuntime(SinBlogsException exception){
-        return new ResponseEntity<>(exception.getMessage(), HttpStatus.NOT_FOUND);
-    }*/
+    @ExceptionHandler(NullPointerException.class)
+    public ResponseEntity<String> handlerRuntime1(NullPointerException exception){
+        return new ResponseEntity<>("Es un array vacio", HttpStatus.NOT_FOUND);
+    }
 }
