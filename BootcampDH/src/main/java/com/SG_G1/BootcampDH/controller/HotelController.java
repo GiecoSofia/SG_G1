@@ -40,7 +40,7 @@ public class HotelController {
         }
         return new ResponseEntity<>(hoteles, HttpStatus.OK);
     }
-
+    //Us006
     @PostMapping("/api/v1/booking")
     public ResponseEntity<DTOresponsive3> booking(@RequestBody DTOresquest3 booking){
         return new ResponseEntity<>(hotelService.booking(booking), HttpStatus.OK);
