@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -30,8 +31,8 @@ public class HotelController {
     }
 
     @GetMapping ("/api/v1/hotelss")
-    public ResponseEntity<List<HotelModel>> listHotelDips(@RequestParam String dateFrom,
-                                                          @RequestParam String dateTo,
+    public ResponseEntity<List<HotelModel>> listHotelDips(@RequestParam ("dateFrom") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateFrom,
+                                                          @RequestParam ("dateTo") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateTo,
                                                           @RequestParam String destination){
         List<HotelModel> hoteles = hotelService.hotelRepositoryListDisp(dateFrom,dateTo, destination);
         if(hoteles.isEmpty()){

@@ -37,7 +37,7 @@ public class FlightService {
     public List<FlightModel> flightRepositoryListDisp(String from, String to, String destination){
         FlightRepository lista = new FlightRepository();
         List<FlightModel> nuevaLista = new ArrayList<>();
-
+        
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         LocalDate dateFrom = null;

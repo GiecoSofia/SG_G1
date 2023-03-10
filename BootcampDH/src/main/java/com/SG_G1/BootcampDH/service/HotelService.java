@@ -27,21 +27,10 @@ public class HotelService {
         return lista.getHotels();
     };
 
-    public List<HotelModel> hotelRepositoryListDisp(String from, String to, String destination){
+    public List<HotelModel> hotelRepositoryListDisp(LocalDate dateFrom, LocalDate dateTo, String destination){
         HotelRepository lista = new HotelRepository();
         List<HotelModel> nuevaLista = new ArrayList<>();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dateFrom = null;
-
-        LocalDate dateTo = null;
-        try {
-             dateFrom = LocalDate.parse(from,formatter);
-
-             dateTo = LocalDate.parse(to,formatter);
-        }catch (DateTimeParseException exception){
-            throw new RuntimeException("La formato de la fecha es invalido, dd/MM/yyyy ");
-        }
 
 
 
