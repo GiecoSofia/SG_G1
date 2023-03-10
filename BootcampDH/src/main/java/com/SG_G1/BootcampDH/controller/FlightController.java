@@ -8,10 +8,12 @@ import com.SG_G1.BootcampDH.model.FlightModel;
 import com.SG_G1.BootcampDH.model.HotelModel;
 import com.SG_G1.BootcampDH.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -30,8 +32,8 @@ public class FlightController {
     }
 
     @GetMapping("/api/v1/flightss")
-    public ResponseEntity<List<FlightModel>> listFlightDisp(@RequestParam String dateFrom,
-                                                            @RequestParam String dateTo,
+    public ResponseEntity<List<FlightModel>> listFlightDisp(@RequestParam ("dateFrom") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateFrom,
+                                                            @RequestParam ("dateTo") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateTo,
                                                             @RequestParam String destination){
 
         List<FlightModel> flights = flightService.flightRepositoryListDisp(dateFrom,dateTo,destination);

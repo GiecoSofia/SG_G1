@@ -31,9 +31,7 @@ public class HotelService {
         HotelRepository lista = new HotelRepository();
         List<HotelModel> nuevaLista = new ArrayList<>();
 
-
-
-
+        
         for (HotelModel hotel:lista.getHotels()) {
             if(destination.equals(hotel.getPlace()) && dateFrom.equals(hotel.getFrom()) && dateTo.equals(hotel.getTo())){
                 nuevaLista.add(hotel);
@@ -41,6 +39,7 @@ public class HotelService {
         }
         return nuevaLista;
     }
+    
      public DTOresponsive3 booking(DTOresquest3 booking){
         DTOresponsive3 responsive = new DTOresponsive3();
         responsive.setUserName(booking.getUserName());
@@ -79,7 +78,8 @@ public class HotelService {
              }
          }
          System.out.println(hotel);
-        total = dias * hotel.getPrice();
+            total = dias * hotel.getPrice();
+         
 
 
          responsive.setTotal(total);
@@ -91,6 +91,7 @@ public class HotelService {
 
          return responsive;
      }
+
 }
 
 
