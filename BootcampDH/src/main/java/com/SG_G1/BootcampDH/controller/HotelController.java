@@ -12,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.util.Date;
@@ -52,7 +53,7 @@ public class HotelController {
     }
     //Us006
     @PostMapping("/api/v1/booking")
-    public ResponseEntity<DTOresponsive3> booking(@RequestBody DTOresquest3 booking){
+    public ResponseEntity<DTOresponsive3> booking(@RequestBody @Valid DTOresquest3 booking){
         return new ResponseEntity<>(hotelService.booking(booking), HttpStatus.OK);
     }
 

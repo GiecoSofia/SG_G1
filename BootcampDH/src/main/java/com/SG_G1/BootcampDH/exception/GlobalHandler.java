@@ -57,15 +57,14 @@ public class GlobalHandler {
 
     }
     // Validaciones de los DTO
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<ErrorDTO> validationException(ConstraintViolationException e){
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ErrorDTO> validationException(MethodArgumentNotValidException e){
         return ResponseEntity.badRequest().body(
                 new ErrorDTO("Se encontraron los siguientes errores en las validaciones: ",
-                        e.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.toList())
+                        e.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.toList())
                 )
         );
     }
-
 
 
 }

@@ -6,12 +6,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+
 public class DTOresquest3 {
 
     private String userName;
-    private BookingModel booking;
+
+    private @Valid BookingModel booking;
     private PaymentMethod paymentMethod;
 }

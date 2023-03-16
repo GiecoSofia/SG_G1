@@ -20,24 +20,29 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import static java.time.temporal.ChronoUnit.DAYS;
+
+
 
 @Service
 public class HotelService {
     @Autowired
-    public List<HotelModel> hotelRepositoryList(){
+    public List<HotelModel> hotelRepositoryList() {
         HotelRepository lista = new HotelRepository();
         return lista.getHotels();
-    };
+    }
 
-    public List<HotelModel> hotelRepositoryListDisp(LocalDate dateFrom, LocalDate dateTo, String destination){
+    ;
+
+    public List<HotelModel> hotelRepositoryListDisp(LocalDate dateFrom, LocalDate dateTo, String destination) {
         HotelRepository lista = new HotelRepository();
         List<HotelModel> nuevaLista = new ArrayList<>();
 
-        Validaciones(dateFrom,dateTo,destination);
+        Validaciones(dateFrom, dateTo, destination);
 
-        
-        for (HotelModel hotel:lista.getHotels()) {
-            if(destination.equals(hotel.getPlace()) && dateFrom.equals(hotel.getFrom()) && dateTo.equals(hotel.getTo())){
+
+        for (HotelModel hotel : lista.getHotels()) {
+            if (destination.equals(hotel.getPlace()) && dateFrom.equals(hotel.getFrom()) && dateTo.equals(hotel.getTo())) {
                 nuevaLista.add(hotel);
             }
         }
@@ -45,77 +50,76 @@ public class HotelService {
     }
 
 
+    public DTOresponsive3 booking(DTOresquest3 booking) {
 
-    public DTOresponsive3 booking(DTOresquest3 booking){
+        Validaciones(booking.getBooking().getDateFrom(), booking.getBooking().getDateTo(), booking.getBooking().getDestination());
+
+        ValidationRoomType(booking.getBooking().getRoomType(), booking.getBooking().getPeopleAmount());
+
         DTOresponsive3 responsive = new DTOresponsive3();
         responsive.setUserName(booking.getUserName());
 
-        double total ;
+        Long dias = DAYS.between(booking.getBooking().getDateFrom(), booking.getBooking().getDateTo());
 
-         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        HotelModel hotel = SearchHotel(booking.getBooking().getHotelCode());
+        double total = dias * hotel.getPrice();
 
-         ParsePosition position = new ParsePosition(0);
-         ParsePosition position1 = new ParsePosition(0);
+        responsive.setTotal(total);
+        responsive.setBooking(booking.getBooking());
+        responsive.setStatus(new StatusCode(200, "El proceso termino satisfactoriamente"));
 
-         Date fechaActual = null;
+        return responsive;
+    }
 
-         Date fechaInicio = null;
+    private void ValidationRoomType(String roomType, int peopleAmount) {
 
-         try {
-             fechaActual = formato.parse(booking.getBooking().getDateTo(),position);
+        if(roomType.equals("SINGLE") && peopleAmount == 1){
+            return;
+        }
+        else if (roomType.equals("DOUBLE") && peopleAmount == 2) {
+            return;
+        }
+        else if (roomType.equals("TRIPLE") && peopleAmount == 3) {
+            return;
+        }
+        else if (roomType.equals("MULTIPLE") && peopleAmount > 3) {
+            return;
+        }
+        else {
+            throw new RuntimeException("El tipo de habitación seleccionada no coincide con la cantidad de personas que se alojarán en ella.");
+        }
+    }
 
-             fechaInicio = formato.parse(booking.getBooking().getDateFrom(),position1);
-
-         }catch (DateTimeParseException exception){
-             throw new RuntimeException("La formato de la fecha es invalido, dd/MM/yyyy ");
-         }
-
-        int dias = (int) ((fechaActual.getTime()-fechaInicio.getTime()) / 86400000);
-
+    private HotelModel SearchHotel(String hotelCode) {
         HotelRepository hoteles = new HotelRepository();
 
         HotelModel hotel = new HotelModel();
 
-         for (HotelModel hotel1:hoteles.getHotels()) {
-             System.out.println(booking.getBooking().getHotelCode());
-             System.out.println(hotel1.getCode());
-             if (booking.getBooking().getHotelCode().equals(hotel1.getCode())){
-                 hotel = hotel1;
-             }
-         }
-         System.out.println(hotel);
-            total = dias * hotel.getPrice();
-         
+        for (HotelModel hotel1 : hoteles.getHotels()) {
+
+            if (hotelCode.equals(hotel1.getCode())) {
+                hotel = hotel1;
+            }
+        }
+        return hotel;
+    }
 
 
-         responsive.setTotal(total);
-
-
-         responsive.setBooking(booking.getBooking());
-
-         responsive.setStatus(new StatusCode(200,"El proceso termino satisfactoriamente"));
-
-         return responsive;
-     }
-
-
-     //Validaciones
+    //Validaciones
     private void Validaciones(LocalDate dateFrom, LocalDate dateTo, String destination) {
 
-        if (dateFrom.compareTo(dateTo) > 0){
+        if (dateFrom.compareTo(dateTo) > 0) {
             throw new ValidationParams("La fecha de entrada debe ser menor a la de salida" +
-                    ""+"La fecha de entrada debe ser mayor a la de entrada");
+                    "" + "La fecha de entrada debe ser mayor a la de entrada");
         }
 
         HotelRepository lista = new HotelRepository();
 
-
         lista.getHotels().stream()
                 .filter(hoteles -> hoteles.getPlace().equals(destination))
                 .findFirst().orElseThrow(() -> new ValidationParams("El destino elegido no existe"));
-
-
     }
+
 
 }
 
