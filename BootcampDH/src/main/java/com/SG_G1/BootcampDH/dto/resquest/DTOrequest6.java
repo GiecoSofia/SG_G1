@@ -7,13 +7,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.Valid;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class DTOrequest6 {
 
     private String userName;
-    private FlightReservationModel flightReservation;
+    private @Valid FlightReservationModel flightReservation;
     private PaymentMethod paymentMethod;
 }
 

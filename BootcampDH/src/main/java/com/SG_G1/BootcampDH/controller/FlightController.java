@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class FlightController {
                                                             @RequestParam ("dateTo") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateTo,
                                                             @RequestParam String destination){
 
-        List<FlightModel> flights = flightService.flightRepositoryListDisp(dateFrom,dateTo,destination);
+        List<FlightModel> flights = flightService.flightRepositoryListDisp(dateFrom,dateTo, destination);
         if(flights.isEmpty()) {
             throw new NullPointerException();
         }
@@ -46,7 +47,7 @@ public class FlightController {
     }
 
     @PostMapping("/api/v1/flight-reservation")
-    public ResponseEntity<DTOresponsive6> flightReservation(@RequestBody DTOrequest6 flightReservation){
+    public ResponseEntity<DTOresponsive6> flightReservation(@RequestBody @Valid DTOrequest6 flightReservation){
         return new ResponseEntity<>(flightService.flightReservation(flightReservation), HttpStatus.OK);
     }
 
