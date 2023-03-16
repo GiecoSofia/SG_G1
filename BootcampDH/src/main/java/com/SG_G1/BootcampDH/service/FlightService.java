@@ -34,22 +34,10 @@ public class FlightService {
 
     }
 
-    public List<FlightModel> flightRepositoryListDisp(String from, String to, String destination){
+    public List<FlightModel> flightRepositoryListDisp(LocalDate dateFrom, LocalDate dateTo, String destination){
         FlightRepository lista = new FlightRepository();
         List<FlightModel> nuevaLista = new ArrayList<>();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
-        LocalDate dateFrom = null;
-
-        LocalDate dateTo = null;
-        try {
-            dateFrom = LocalDate.parse(from,formatter);
-
-            dateTo = LocalDate.parse(to,formatter);
-        } catch (DateTimeParseException exception) {
-            throw new RuntimeException("La formato de la fecha es invalido, dd/MM/yyyy ");
-        }
         for(FlightModel flight: lista.getFlights()){
             if(destination.equals(flight.getDestination()) && dateFrom.equals(flight.getFrom()) && dateTo.equals(flight.getTo())){
                 nuevaLista.add(flight);
@@ -64,15 +52,11 @@ public class FlightService {
 
         double total ;
 
-        ZoneId defaultZoneId = ZoneId.systemDefault();
-
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
 
         ParsePosition position = new ParsePosition(0);
         ParsePosition position1 = new ParsePosition(0);
 
-        System.out.println(flightReservation.getFlightReservation().getDateTo());
-        System.out.println(flightReservation.getFlightReservation().getDateFrom());
 
         Date fechaActual = null;
 
@@ -93,13 +77,11 @@ public class FlightService {
         FlightModel flight = new FlightModel();
 
         for (FlightModel flight1:flights.getFlights()) {
-            System.out.println(flightReservation.getFlightReservation().getFlightNumber());
-            System.out.println(flight1.getCode());
             if (flightReservation.getFlightReservation().getFlightNumber().equals(flight1.getCode())){
                 flight = flight1;
             }
         }
-        System.out.println(flight);
+
         total = dias * flight.getPrice();
 
 

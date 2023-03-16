@@ -2,12 +2,14 @@ package com.SG_G1.BootcampDH.service;
 
 import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive3;
 import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
+import com.SG_G1.BootcampDH.exception.ValidationParams;
 import com.SG_G1.BootcampDH.model.HotelModel;
 import com.SG_G1.BootcampDH.model.StatusCode;
 import com.SG_G1.BootcampDH.repository.HotelRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
@@ -27,24 +29,13 @@ public class HotelService {
         return lista.getHotels();
     };
 
-    public List<HotelModel> hotelRepositoryListDisp(String from, String to, String destination){
+    public List<HotelModel> hotelRepositoryListDisp(LocalDate dateFrom, LocalDate dateTo, String destination){
         HotelRepository lista = new HotelRepository();
         List<HotelModel> nuevaLista = new ArrayList<>();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate dateFrom = null;
+        Validaciones(dateFrom,dateTo,destination);
 
-        LocalDate dateTo = null;
-        try {
-             dateFrom = LocalDate.parse(from,formatter);
-
-             dateTo = LocalDate.parse(to,formatter);
-        }catch (DateTimeParseException exception){
-            throw new RuntimeException("La formato de la fecha es invalido, dd/MM/yyyy ");
-        }
-
-
-
+        
         for (HotelModel hotel:lista.getHotels()) {
             if(destination.equals(hotel.getPlace()) && dateFrom.equals(hotel.getFrom()) && dateTo.equals(hotel.getTo())){
                 nuevaLista.add(hotel);
@@ -52,7 +43,10 @@ public class HotelService {
         }
         return nuevaLista;
     }
-     public DTOresponsive3 booking(DTOresquest3 booking){
+
+
+
+    public DTOresponsive3 booking(DTOresquest3 booking){
         DTOresponsive3 responsive = new DTOresponsive3();
         responsive.setUserName(booking.getUserName());
 
@@ -90,7 +84,8 @@ public class HotelService {
              }
          }
          System.out.println(hotel);
-        total = dias * hotel.getPrice();
+            total = dias * hotel.getPrice();
+         
 
 
          responsive.setTotal(total);
@@ -102,6 +97,26 @@ public class HotelService {
 
          return responsive;
      }
+
+
+     //Validaciones
+    private void Validaciones(LocalDate dateFrom, LocalDate dateTo, String destination) {
+
+        if (dateFrom.compareTo(dateTo) > 0){
+            throw new ValidationParams("La fecha de entrada debe ser menor a la de salida" +
+                    ""+"La fecha de entrada debe ser mayor a la de entrada");
+        }
+
+        HotelRepository lista = new HotelRepository();
+
+
+        lista.getHotels().stream()
+                .filter(hoteles -> hoteles.getPlace().equals(destination))
+                .findFirst().orElseThrow(() -> new ValidationParams("El destino elegido no existe"));
+
+
+    }
+
 }
 
 

@@ -9,12 +9,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 @RestController
+@Validated
+
 public class HotelController {
     @Autowired
     private HotelService hotelService;
@@ -30,9 +35,14 @@ public class HotelController {
     }
 
     @GetMapping ("/api/v1/hotelss")
-    public ResponseEntity<List<HotelModel>> listHotelDips(@RequestParam String dateFrom,
-                                                          @RequestParam String dateTo,
+    public ResponseEntity<List<HotelModel>> listHotelDips(@RequestParam ("dateFrom") @DateTimeFormat(pattern = "dd/MM/yyyy")  LocalDate dateFrom ,
+                                                          @RequestParam ("dateTo") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateTo,
                                                           @RequestParam String destination){
+
+
+
+
+
         List<HotelModel> hoteles = hotelService.hotelRepositoryListDisp(dateFrom,dateTo, destination);
         if(hoteles.isEmpty()){
             throw new NullPointerException();

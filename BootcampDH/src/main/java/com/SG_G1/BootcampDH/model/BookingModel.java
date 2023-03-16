@@ -20,4 +20,5 @@ public class BookingModel {
     private String roomType;
     private List<PeopleModel> people;
 
+
 }
