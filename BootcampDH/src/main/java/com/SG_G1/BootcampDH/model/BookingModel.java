@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.time.LocalDate;
 import java.util.List;
@@ -26,7 +27,7 @@ public class BookingModel {
     @Positive(message = "La cantidad de personas debe ser un valor numérico.")
     private int peopleAmount;
     private String roomType;
-    private List<PeopleModel> people;
+    private List<@Valid PeopleModel> people;
 
 
 }

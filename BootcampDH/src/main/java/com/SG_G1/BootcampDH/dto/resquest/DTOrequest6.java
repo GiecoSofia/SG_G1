@@ -8,12 +8,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class DTOrequest6 {
-
+    @Email(message = "Por favor ingrese un e-mail válido")
     private String userName;
     private @Valid FlightReservationModel flightReservation;
     private PaymentMethod paymentMethod;

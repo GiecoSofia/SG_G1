@@ -35,9 +35,10 @@ public class FlightController {
     @GetMapping("/api/v1/flightss")
     public ResponseEntity<List<FlightModel>> listFlightDisp(@RequestParam ("dateFrom") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateFrom,
                                                             @RequestParam ("dateTo") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateTo,
+                                                            @RequestParam String origin,
                                                             @RequestParam String destination){
 
-        List<FlightModel> flights = flightService.flightRepositoryListDisp(dateFrom,dateTo, destination);
+        List<FlightModel> flights = flightService.flightRepositoryListDisp(dateFrom,dateTo,origin, destination);
         if(flights.isEmpty()) {
             throw new NullPointerException();
         }

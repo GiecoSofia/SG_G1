@@ -26,12 +26,12 @@ public class FlightService {
 
     }
 
-    public List<FlightModel> flightRepositoryListDisp(LocalDate dateFrom, LocalDate dateTo, String destination){
+    public List<FlightModel> flightRepositoryListDisp(LocalDate dateFrom, LocalDate dateTo, String origin, String destination){
         FlightRepository lista = new FlightRepository();
         List<FlightModel> nuevaLista = new ArrayList<>();
 
         for(FlightModel flight: lista.getFlights()){
-            if(destination.equals(flight.getDestination()) && dateFrom.equals(flight.getFrom()) && dateTo.equals(flight.getTo())){
+            if(origin.equals(flight.getOrigin()) && destination.equals(flight.getDestination()) && dateFrom.equals(flight.getFrom()) && dateTo.equals(flight.getTo())){
                 nuevaLista.add(flight);
             }
         }
@@ -40,7 +40,7 @@ public class FlightService {
 
     public DTOresponsive6 flightReservation(DTOrequest6 flightReservation) {
 
-        Validaciones(flightReservation.getFlightReservation().getDateFrom(), flightReservation.getFlightReservation().getDateTo(), flightReservation.getFlightReservation().getDestination());
+        Validaciones(flightReservation.getFlightReservation().getDateFrom(), flightReservation.getFlightReservation().getDateTo(),flightReservation.getFlightReservation().getOrigin(), flightReservation.getFlightReservation().getDestination());
 
         DTOresponsive6 responsive = new DTOresponsive6();
         responsive.setUserName(flightReservation.getUserName());
@@ -75,15 +75,18 @@ public class FlightService {
 
 
     //Validaciones
-    private void Validaciones(LocalDate dateFrom, LocalDate dateTo, String destination) {
+    private void Validaciones(LocalDate dateFrom, LocalDate dateTo, String origin, String destination) {
 
         if (dateFrom.compareTo(dateTo) > 0) {
             throw new ValidationParams("La fecha de entrada debe ser menor a la de salida" +
                     "" + "La fecha de entrada debe ser mayor a la de entrada");
         }
 
-        //FlightRepository listaOrigen = new FlightRepository(); falta agregar los parametros en el controller
-        // para terminar esta validacion, intente pero tiraba error :/
+        FlightRepository listaOrigen = new FlightRepository();
+
+        listaOrigen.getFlights().stream()
+                .filter(flight -> flight.getOrigin().equals(origin))
+                .findFirst().orElseThrow(() -> new ValidationParams("El origen elegido no existe"));
 
 
         FlightRepository listaDestino = new FlightRepository();
