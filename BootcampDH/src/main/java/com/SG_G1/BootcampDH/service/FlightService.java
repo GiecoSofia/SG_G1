@@ -27,14 +27,18 @@ public class FlightService {
     }
 
     public List<FlightModel> flightRepositoryListDisp(LocalDate dateFrom, LocalDate dateTo, String origin, String destination){
+
         FlightRepository lista = new FlightRepository();
         List<FlightModel> nuevaLista = new ArrayList<>();
+
+        Validaciones(dateFrom,dateTo,origin,destination);
 
         for(FlightModel flight: lista.getFlights()){
             if(origin.equals(flight.getOrigin()) && destination.equals(flight.getDestination()) && dateFrom.equals(flight.getFrom()) && dateTo.equals(flight.getTo())){
                 nuevaLista.add(flight);
             }
         }
+
         return nuevaLista;
     }
 
