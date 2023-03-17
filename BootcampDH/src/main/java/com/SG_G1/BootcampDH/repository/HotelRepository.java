@@ -47,10 +47,10 @@ public class HotelRepository {
                 "EC-0003", "El Campín", "Bogotá", "Triple", 7020.0, LocalDate.of(2022, 02, 15), LocalDate.of(2022,03, 27), false
         );
         HotelModel hotel10 = new HotelModel(
-                "CP-0004", "Central PLaza", "Medellin", "Multiple", 8600.0, LocalDate.of(2022, 03, 01), LocalDate.of(2022,04, 17),false
+                "CP-0004", "Central Plaza", "Medellin", "Multiple", 8600.0, LocalDate.of(2022, 03, 01), LocalDate.of(2022,04, 17),false
         );
         HotelModel hotel11 = new HotelModel(
-                "CP-0002", "Central PLaza 2", "Medellin", "Doble", 6400.0, LocalDate.of(2022, 02, 10), LocalDate.of(2022,03, 20),false
+                "CP-0002", "Central Plaza 2", "Medellin", "Doble", 6400.0, LocalDate.of(2022, 02, 10), LocalDate.of(2022,03, 20),false
         );
         HotelModel hotel12 = new HotelModel(
                 "BG-0004", "Bocagranue", "Cartagena", "Multiple", 9370.0, LocalDate.of(2022, 04, 17), LocalDate.of(2022,06, 12),false

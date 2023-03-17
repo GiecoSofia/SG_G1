@@ -1,6 +1,7 @@
 package com.SG_G1.BootcampDH.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.cglib.core.Local;
@@ -11,6 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Builder
 public class HotelModel {
 
     private String code;

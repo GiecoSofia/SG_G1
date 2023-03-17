@@ -34,7 +34,7 @@ public class GlobalHandler {
     // Validacion de Jason
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<String> handlerRuntime(HttpMessageNotReadableException exception){
-        return new ResponseEntity<>("El json no esta mandodado de manera corrrecta", HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>("El json no esta mandado de manera corrrecta", HttpStatus.BAD_REQUEST);
     }
 
     // Validacion de Array vacio (base de datos futuro)
