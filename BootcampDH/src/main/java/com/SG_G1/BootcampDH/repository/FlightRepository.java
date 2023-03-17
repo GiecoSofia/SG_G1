@@ -22,10 +22,10 @@ public class FlightRepository {
 
     public List<FlightModel> agregar(){
         FlightModel flight1 = new FlightModel(
-                "BAPI-1235", "Buenos Aires", "Puerto Iguazú", "Economy", 6.500, LocalDate.of(2022, 02, 10), LocalDate.of(2023, 02, 15)
+                "BAPI-1235", "Buenos Aires", "Puerto Iguazú", "Economy", 6500.0, LocalDate.of(2022, 02, 10), LocalDate.of(2023, 02, 15)
         );
         FlightModel flight2 = new FlightModel(
-                "PIBA-1420", "Puerto Iguazú", "Bogotá", "Business", 43.200, LocalDate.of(2022,02,10), LocalDate.of(2022,02,20)
+                "PIBA-1420", "Puerto Iguazú", "Bogotá", "Business", 43200.0, LocalDate.of(2022,02,10), LocalDate.of(2022,02,20)
         );
         FlightModel flight3 = new FlightModel(
                 "PIBA-1420", "Puerto Iguazú", "Bogotá", "Economy", 25735.00, LocalDate.of(2022,02,10), LocalDate.of(2022,02,21)
@@ -34,10 +34,10 @@ public class FlightRepository {
                 "BATU-5536", "Buenos Aires", "Tucumán", "Economy", 7320.00, LocalDate.of(2022,02,10), LocalDate.of(2022,02,17)
         );
         FlightModel flight5 = new FlightModel(
-                "TUPI-3369", "Tucumán", "Puerto Iguazú", "Business", 12.530, LocalDate.of(2022,02,12), LocalDate.of(2022,02,23)
+                "TUPI-3369", "Tucumán", "Puerto Iguazú", "Business", 12530.0, LocalDate.of(2022,02,12), LocalDate.of(2022,02,23)
         );
         FlightModel flight6 = new FlightModel(
-                "TUPI-3369", "Tucumán", "Puerto Iguazú", "Economy", 5.400, LocalDate.of(2022,01,02), LocalDate.of(2022,01,16)
+                "TUPI-3369", "Tucumán", "Puerto Iguazú", "Economy", 5400.0, LocalDate.of(2022,01,02), LocalDate.of(2022,01,16)
         );
         FlightModel flight7 = new FlightModel(
                 "BOCA-4213", "Bogotá", "Cartagena", "Economy", 8000.00, LocalDate.of(2022,01,23), LocalDate.of(2022,02,5)
