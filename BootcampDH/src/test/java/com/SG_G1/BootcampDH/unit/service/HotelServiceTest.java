@@ -110,9 +110,9 @@ public class HotelServiceTest {
 
     }
 
-        @Test
-        @DisplayName("Testeamos cuando la reserva no se puede concretar")
-        public void flightNullReservationTest () {
+    @Test
+    @DisplayName("Testeamos cuando la reserva no se puede concretar")
+    public void flightNullReservationTest () {
             //arrange
             DTOresquest3 params = DTORequestHotelFactory.DTORequest3();
             params.getBooking().setDateFrom(LocalDate.parse("2025-02-10"));
