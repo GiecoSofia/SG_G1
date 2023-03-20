@@ -1,5 +1,7 @@
 package com.SG_G1.BootcampDH.unit.service;
 
+import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive6;
+import com.SG_G1.BootcampDH.dto.resquest.DTOrequest6;
 import com.SG_G1.BootcampDH.exception.ValidationParams;
 import com.SG_G1.BootcampDH.model.FlightModel;
 import com.SG_G1.BootcampDH.model.HotelModel;
@@ -7,6 +9,8 @@ import com.SG_G1.BootcampDH.repository.FlightRepository;
 import com.SG_G1.BootcampDH.repository.HotelRepository;
 import com.SG_G1.BootcampDH.service.FlightService;
 import com.SG_G1.BootcampDH.service.HotelService;
+import com.SG_G1.BootcampDH.utils.DTORequestFlightFactory;
+import com.SG_G1.BootcampDH.utils.DTOResponseFlightFactory;
 import com.SG_G1.BootcampDH.utils.FlightFactory;
 import com.SG_G1.BootcampDH.utils.HotelFactory;
 import org.junit.jupiter.api.Assertions;
@@ -83,5 +87,35 @@ public class FlightServiceTest {
 
         //assert
         Assertions.assertThrows(ValidationParams.class,() -> flightService.flightRepositoryListDisp(dateFrom, dateTo,origin,destination));
+    }
+
+    @Test
+    @DisplayName("Testeamos cuando se da de alta la nueva reserva")
+    public void flightReservationTest(){
+        //arrange
+        DTOrequest6 params = DTORequestFlightFactory.DTORequest6();
+        DTOresponsive6 expected = DTOResponseFlightFactory.DTOResponsive6();
+
+        //act
+        Mockito.lenient().when(flightRepository.getFlights()).thenReturn(FlightFactory.flightList());
+        var result = flightService.flightReservation(params);
+
+
+        //assert
+        Assertions.assertEquals(expected, result);
+
+    }
+    @Test
+    @DisplayName("Testeamos cuando la reserva no se puede concretar")
+    public void flightNullReservationTest(){
+        //arrange
+        DTOrequest6 params = DTORequestFlightFactory.DTORequest6();
+        params.getFlightReservation().setDateFrom(LocalDate.parse("2025-02-10"));
+
+        //act
+        Mockito.lenient().when(flightRepository.getFlights()).thenReturn(FlightFactory.flightList());
+
+        //assert
+        Assertions.assertThrows(ValidationParams.class,() -> flightService.flightReservation(params));
     }
 }

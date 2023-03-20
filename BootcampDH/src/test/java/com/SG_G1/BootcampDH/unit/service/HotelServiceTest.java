@@ -1,10 +1,14 @@
 package com.SG_G1.BootcampDH.unit.service;
 
+import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive3;
+import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive6;
+import com.SG_G1.BootcampDH.dto.resquest.DTOrequest6;
+import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
 import com.SG_G1.BootcampDH.exception.ValidationParams;
 import com.SG_G1.BootcampDH.model.HotelModel;
 import com.SG_G1.BootcampDH.repository.HotelRepository;
 import com.SG_G1.BootcampDH.service.HotelService;
-import com.SG_G1.BootcampDH.utils.HotelFactory;
+import com.SG_G1.BootcampDH.utils.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,6 +29,8 @@ public class HotelServiceTest {
 
     @InjectMocks
     HotelService hotelService;
+
+
 
     @Test
     @DisplayName("Testea que hay hoteles registrados")
@@ -87,5 +93,39 @@ public class HotelServiceTest {
         Assertions.assertThrows(ValidationParams.class,() -> hotelService.hotelRepositoryListDisp(dateFrom,dateTo,place));
     }
 
+    @Test
+    @DisplayName("Testeamos cuando se da de alta la nueva reserva")
+    public void hotelReservationTest() {
+        //arrange
+        DTOresquest3 params = DTORequestHotelFactory.DTORequest3();
+        DTOresponsive3 expected = DTOResponseHotelFactory.DTOResponsive3();
 
-}
+        //act
+        Mockito.lenient().when(hotelRepository.getHotels()).thenReturn(HotelFactory.hotelList());
+        var result = hotelService.booking(params);
+
+
+        //assert
+        Assertions.assertEquals(expected, result);
+
+    }
+
+        @Test
+        @DisplayName("Testeamos cuando la reserva no se puede concretar")
+        public void flightNullReservationTest () {
+            //arrange
+            DTOresquest3 params = DTORequestHotelFactory.DTORequest3();
+            params.getBooking().setDateFrom(LocalDate.parse("2025-02-10"));
+
+            //act
+            Mockito.lenient().when(hotelRepository.getHotels()).thenReturn(HotelFactory.hotelList());
+
+            //assert
+            Assertions.assertThrows(ValidationParams.class, () -> hotelService.booking(params));
+        }
+
+    }
+
+
+
+

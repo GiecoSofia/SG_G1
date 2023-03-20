@@ -27,21 +27,23 @@ import static java.time.temporal.ChronoUnit.DAYS;
 @Service
 public class HotelService {
     @Autowired
+    HotelRepository repository;
+
     public List<HotelModel> hotelRepositoryList() {
-        HotelRepository lista = new HotelRepository();
-        return lista.getHotels();
+
+        return repository.getHotels();
     }
 
     ;
 
     public List<HotelModel> hotelRepositoryListDisp(LocalDate dateFrom, LocalDate dateTo, String destination) {
-        HotelRepository lista = new HotelRepository();
+
         List<HotelModel> nuevaLista = new ArrayList<>();
 
         Validaciones(dateFrom, dateTo, destination);
 
 
-        for (HotelModel hotel : lista.getHotels()) {
+        for (HotelModel hotel : repository.getHotels()) {
             if (destination.equals(hotel.getPlace()) && dateFrom.equals(hotel.getFrom()) && dateTo.equals(hotel.getTo())) {
                 nuevaLista.add(hotel);
             }
@@ -91,11 +93,11 @@ public class HotelService {
     }
 
     private HotelModel SearchHotel(String hotelCode) {
-        HotelRepository hoteles = new HotelRepository();
+
 
         HotelModel hotel = new HotelModel();
 
-        for (HotelModel hotel1 : hoteles.getHotels()) {
+        for (HotelModel hotel1 : repository.getHotels()) {
 
             if (hotelCode.equals(hotel1.getCode())) {
                 hotel = hotel1;
@@ -113,9 +115,9 @@ public class HotelService {
                     "" + "La fecha de entrada debe ser mayor a la de entrada");
         }
 
-        HotelRepository lista = new HotelRepository();
 
-        lista.getHotels().stream()
+
+        repository.getHotels().stream()
                 .filter(hoteles -> hoteles.getPlace().equals(destination))
                 .findFirst().orElseThrow(() -> new ValidationParams("El destino elegido no existe"));
     }

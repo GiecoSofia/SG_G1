@@ -1,11 +1,12 @@
 package com.SG_G1.BootcampDH.repository;
 
 import com.SG_G1.BootcampDH.model.HotelModel;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+@Repository
 public class HotelRepository {
     private List<HotelModel> hotels;
 

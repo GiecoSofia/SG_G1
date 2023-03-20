@@ -17,23 +17,23 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 @Service
 public class FlightService {
-
     @Autowired
-    public List<FlightModel> flightRepositoryList(){
-        FlightRepository lista = new FlightRepository();
+    FlightRepository repository;
 
-        return lista.getFlights();
+    public List<FlightModel> flightRepositoryList(){
+
+        return repository.getFlights();
 
     }
 
     public List<FlightModel> flightRepositoryListDisp(LocalDate dateFrom, LocalDate dateTo, String origin, String destination){
 
-        FlightRepository lista = new FlightRepository();
+
         List<FlightModel> nuevaLista = new ArrayList<>();
 
         Validaciones(dateFrom,dateTo,origin,destination);
 
-        for(FlightModel flight: lista.getFlights()){
+        for(FlightModel flight: repository.getFlights()){
             if(origin.equals(flight.getOrigin()) && destination.equals(flight.getDestination()) && dateFrom.equals(flight.getFrom()) && dateTo.equals(flight.getTo())){
                 nuevaLista.add(flight);
             }
@@ -64,11 +64,11 @@ public class FlightService {
 
 
     private FlightModel SearchFlight(String flightNumber) {
-        FlightRepository flights = new FlightRepository();
+
 
         FlightModel flight = new FlightModel();
 
-        for (FlightModel flight1 : flights.getFlights()) {
+        for (FlightModel flight1 : repository.getFlights()) {
 
             if (flightNumber.equals(flight1.getCode())) {
                 flight = flight1;
@@ -86,16 +86,16 @@ public class FlightService {
                     "" + "La fecha de entrada debe ser mayor a la de entrada");
         }
 
-        FlightRepository listaOrigen = new FlightRepository();
 
-        listaOrigen.getFlights().stream()
+
+        repository.getFlights().stream()
                 .filter(flight -> flight.getOrigin().equals(origin))
                 .findFirst().orElseThrow(() -> new ValidationParams("El origen elegido no existe"));
 
 
-        FlightRepository listaDestino = new FlightRepository();
 
-        listaDestino.getFlights().stream()
+
+        repository.getFlights().stream()
                 .filter(flight -> flight.getDestination().equals(destination))
                 .findFirst().orElseThrow(() -> new ValidationParams("El destino elegido no existe"));
 
