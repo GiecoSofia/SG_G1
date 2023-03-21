@@ -167,5 +167,11 @@ public class FlightFactory {
         return lista;
     }
 
+    public static List<FlightModel>flightListNull(){
+        List<FlightModel> lista = new ArrayList<>();
+
+        return lista;
+    }
+
 
 }

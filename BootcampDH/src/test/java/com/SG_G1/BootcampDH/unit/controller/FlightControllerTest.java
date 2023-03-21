@@ -44,12 +44,12 @@ public class FlightControllerTest {
     }
 
     @Test
-    @DisplayName("Testea que trae la excepción cuando la lista de hoteles viene vacia")
-    public void hotelServiceListWithEmptyTest() {
+    @DisplayName("Testea que trae la excepción cuando la lista de vuelos viene vacia")
+    public void flightServiceListWithEmptyTest() {
         //arrange
-        var expected = HotelFactory.hotelList();
+        var expected = FlightFactory.flightList();
         //act
-        Mockito.lenient().when(servicio.flightRepositoryList()).thenReturn(FlightFactory.flightList());
+        Mockito.lenient().when(servicio.flightRepositoryList()).thenReturn(FlightFactory.flightListNull());
 
         //assert
         Assertions.assertThrows(NullPointerException.class, () -> controller.listFlight());

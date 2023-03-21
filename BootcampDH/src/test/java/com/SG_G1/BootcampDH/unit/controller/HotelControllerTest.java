@@ -38,8 +38,8 @@ public class HotelControllerTest {
     HotelController controller;
 
     @Test
-    @DisplayName("Testea que hay vuelos registrados")
-    public void flightServiceListTest() {
+    @DisplayName("Testea que hay hoteles registrados")
+    public void hotelServiceListTest() {
         //arrange
         var expected = new ResponseEntity<>(HotelFactory.hotelList(), HttpStatus.OK);
         //act
@@ -63,7 +63,7 @@ public class HotelControllerTest {
     }
 
     @Test
-    @DisplayName("Testeamos que nos traiga los vuelos disponibles en un rango de fechas, origen y destino")
+    @DisplayName("Testeamos que nos traiga los hoteles disponibles en un rango de fechas y destino")
     public void findDateServicioTest(){
         //Arrange
         LocalDate dateFrom = LocalDate.parse("2022-02-10");
