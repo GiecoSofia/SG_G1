@@ -24,4 +24,10 @@ public class PaymentMethod {
     private String number;
     @Column(name = "dues")
     private int dues;
+
+    @OneToOne(mappedBy = "paymentMethod",fetch = FetchType.LAZY)
+    private BookingModel bookingModel;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    private FlightReservationModel flightReservationModel;
 }

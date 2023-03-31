@@ -6,6 +6,8 @@ import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive3;
 import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
 import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
 import com.SG_G1.BootcampDH.model.HotelModel;
+import com.SG_G1.BootcampDH.repository.IBookingRepository;
+import com.SG_G1.BootcampDH.service.BookingService;
 import com.SG_G1.BootcampDH.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,7 +27,9 @@ import java.util.List;
 
 public class HotelController {
     @Autowired
-    private HotelService hotelService;
+    HotelService hotelService;
+    @Autowired
+    BookingService bookingService;
 
 
     @PostMapping("/new")
@@ -36,6 +40,13 @@ public class HotelController {
                 .build();
         return ResponseEntity.ok(message);
     }
+
+    @PostMapping("/api/v1/hotels/new")
+    public ResponseEntity<MessageDTO> createBooking (@RequestBody DTOresquest3 reserva) {
+        var message = bookingService.saveEntity(reserva.getBooking());
+        return ResponseEntity.ok(message);
+    }
+
     }
 
    /* @GetMapping("/api/v1/hotels")

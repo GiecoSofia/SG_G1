@@ -29,7 +29,9 @@ public class BookingModel {
     @Column(name = "room_type")
     private String roomType;
 
-    @OneToMany(mappedBy = "bookingModel", cascade = CascadeType.ALL)
+    @OneToMany(cascade ={CascadeType.ALL}, fetch = FetchType.LAZY)
     private List<PeopleModel> people;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private PaymentMethod paymentMethod;
 }

@@ -32,8 +32,10 @@ public class PeopleModel {
     @Column(name = "mail")
     private String mail;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private BookingModel bookingModel;
+   /* @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "booking_id", referencedColumnName = "idBooking")*/
+    /*@JoinColumn(foreignKey = @ForeignKey(name = "fk_PeopleModel_booking_id"), name="booking_id", referencedColumnName = "id", nullable = false)*/
+  /*  private BookingModel bookingModel;*/
 
     @ManyToOne(fetch = FetchType.LAZY)
     private FlightReservationModel flightReservationModel;

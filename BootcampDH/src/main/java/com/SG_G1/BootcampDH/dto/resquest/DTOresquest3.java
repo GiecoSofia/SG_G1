@@ -1,5 +1,7 @@
 package com.SG_G1.BootcampDH.dto.resquest;
 
+import com.SG_G1.BootcampDH.dto.BookingModelDTO;
+import com.SG_G1.BootcampDH.dto.PaymentMethodDTO;
 import com.SG_G1.BootcampDH.model.BookingModel;
 import com.SG_G1.BootcampDH.model.PaymentMethod;
 import lombok.AllArgsConstructor;
@@ -19,6 +21,6 @@ public class DTOresquest3 {
     @Email(message = "Por favor ingrese un e-mail válido")
     private String userName;
 
-    private @Valid BookingModel booking;
-    private PaymentMethod paymentMethod;
+    private @Valid BookingModelDTO booking;
+   /* private PaymentMethodDTO paymentMethod;*/
 }

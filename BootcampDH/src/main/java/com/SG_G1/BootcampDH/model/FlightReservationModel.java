@@ -34,5 +34,8 @@ public class FlightReservationModel {
     @OneToMany(mappedBy = "flightReservationModel", cascade = CascadeType.ALL)
     private List<PeopleModel> people;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    private PaymentMethod paymentMethod;
+
 
 }
