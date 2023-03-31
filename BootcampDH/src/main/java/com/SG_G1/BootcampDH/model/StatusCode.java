@@ -5,9 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 //LOMBOK
 @Data
@@ -19,6 +17,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Status Code")
 public class StatusCode {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @Column(length = 50)
     private int code;
     @Column(length = 100)
