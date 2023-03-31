@@ -15,6 +15,7 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 
 
+/*
 @Service
 public class HotelService {
     @Autowired
@@ -115,5 +116,6 @@ public class HotelService {
 
 
 }
+*/
 
 

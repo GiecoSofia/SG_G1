@@ -28,8 +28,8 @@ public class BookingModel {
     private int peopleAmount;
     @Column(name = "room_type")
     private String roomType;
-    @Column(name = "people")
-    private List<PeopleModel> people;
 
+    @OneToMany(mappedBy = "bookingModel", cascade = CascadeType.ALL)
+    private List<PeopleModel> people;
 
 }

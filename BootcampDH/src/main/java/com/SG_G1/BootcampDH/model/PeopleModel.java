@@ -16,7 +16,7 @@ import java.time.LocalDate;
 // JPA
 
 @Entity
-@Table(name = "PeopelModel")
+@Table(name = "PeopleModel")
 public class PeopleModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,4 +31,10 @@ public class PeopleModel {
     private String birthday;
     @Column(name = "mail")
     private String mail;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private BookingModel bookingModel;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private FlightReservationModel flightReservationModel;
 }

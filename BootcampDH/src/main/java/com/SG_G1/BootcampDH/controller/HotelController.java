@@ -1,7 +1,9 @@
 package com.SG_G1.BootcampDH.controller;
 
 
+import com.SG_G1.BootcampDH.dto.HotelModelDTO;
 import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive3;
+import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
 import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
 import com.SG_G1.BootcampDH.model.HotelModel;
 import com.SG_G1.BootcampDH.service.HotelService;
@@ -25,7 +27,18 @@ public class HotelController {
     @Autowired
     private HotelService hotelService;
 
-    @GetMapping("/api/v1/hotels")
+
+    @PostMapping("/new")
+    public ResponseEntity<MessageDTO> createHotel(@RequestBody HotelModelDTO hotelDTO) {
+        hotelService.saveEntity(hotelDTO);
+        MessageDTO message = MessageDTO.builder()
+                .message("Hotel dado de alta correctamente")
+                .build();
+        return ResponseEntity.ok(message);
+    }
+    }
+
+   /* @GetMapping("/api/v1/hotels")
     public ResponseEntity<List<HotelModel>> listHotel(){
         List<HotelModel> hoteles = hotelService.hotelRepositoryList();
         if(hoteles.isEmpty()){
@@ -55,6 +68,6 @@ public class HotelController {
     @PostMapping("/api/v1/booking")
     public ResponseEntity<DTOresponsive3> booking(@RequestBody @Valid DTOresquest3 booking){
         return new ResponseEntity<>(hotelService.booking(booking), HttpStatus.OK);
-    }
+    }*/
 
-}
+

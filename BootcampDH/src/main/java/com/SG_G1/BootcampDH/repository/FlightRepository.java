@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-@Repository
+/*@Repository
 public class FlightRepository {
 
     private List<FlightModel> flights;
@@ -80,4 +80,4 @@ public class FlightRepository {
 
     }
     public List<FlightModel> flightList;
-}
+}*/

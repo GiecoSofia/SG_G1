@@ -14,6 +14,7 @@ import java.util.List;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
+/*
 @Service
 public class FlightService {
     @Autowired
@@ -103,6 +104,7 @@ public class FlightService {
 
 
 }
+*/
 
 
 

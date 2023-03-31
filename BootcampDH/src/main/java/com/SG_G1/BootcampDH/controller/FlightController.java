@@ -17,7 +17,7 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
-@RestController
+/*@RestController
 public class FlightController {
 
     @Autowired
@@ -52,4 +52,4 @@ public class FlightController {
         return new ResponseEntity<>(flightService.flightReservation(flightReservation), HttpStatus.OK);
     }
 
-}
+}*/

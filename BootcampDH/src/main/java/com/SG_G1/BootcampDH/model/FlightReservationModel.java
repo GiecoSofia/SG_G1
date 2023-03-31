@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "Flight Reservation")
+@Table(name = "FlightReservation")
 public class FlightReservationModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,6 +30,9 @@ public class FlightReservationModel {
     private int seats;
     @Column(name = "seat_type")
     private String seatType;
-    @Column(name = "people")
+
+    @OneToMany(mappedBy = "flightReservationModel", cascade = CascadeType.ALL)
     private List<PeopleModel> people;
+
+
 }

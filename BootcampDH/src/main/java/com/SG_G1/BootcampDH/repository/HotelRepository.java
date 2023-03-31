@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-@Repository
+/*@Repository*/
+/*
 public class HotelRepository {
     private List<HotelModel> hotels;
 
@@ -78,3 +79,4 @@ public class HotelRepository {
     public List<HotelModel> hotelList;
 }
 
+*/
