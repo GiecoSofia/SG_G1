@@ -5,13 +5,23 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+//LOMBOK
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 @Builder
-public class StatusCode {
-    private int code;
+// JPA
 
+@Entity
+@Table(name = "Status Code")
+public class StatusCode {
+    @Column(length = 50)
+    private int code;
+    @Column(length = 100)
     private String message;
 
 
