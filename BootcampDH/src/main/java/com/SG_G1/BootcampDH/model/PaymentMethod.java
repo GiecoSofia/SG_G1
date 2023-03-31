@@ -1,14 +1,12 @@
 package com.SG_G1.BootcampDH.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 //LOMBOK
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -20,10 +18,10 @@ public class PaymentMethod {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(length = 10)
+    @Column(name = "type")
     private String type;
-    @Column(length = 10)
+    @Column(name= "number")
     private String number;
-    @Column(length = 10)
+    @Column(name = "dues")
     private int dues;
 }

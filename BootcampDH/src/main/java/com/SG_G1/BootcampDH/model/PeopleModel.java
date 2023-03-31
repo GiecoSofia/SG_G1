@@ -1,9 +1,6 @@
 package com.SG_G1.BootcampDH.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -11,7 +8,8 @@ import java.time.LocalDate;
 
 
 //LOMBOK
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -23,14 +21,14 @@ public class PeopleModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(length = 8)
+    @Column(name = "DNI")
     private int dni;
-    @Column(length = 50)
+    @Column(name = "name")
     private String name;
-    @Column(length = 50)
+    @Column(name = "lastName")
     private String lastName;
-    @Column(length = 20)
+    @Column(name = "birthday")
     private String birthday;
-    @Column(length = 100)
+    @Column(name = "mail")
     private String mail;
 }

@@ -1,14 +1,12 @@
 package com.SG_G1.BootcampDH.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 //LOMBOK
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
@@ -20,9 +18,9 @@ public class StatusCode {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(length = 50)
+    @Column(name = "code")
     private int code;
-    @Column(length = 100)
+    @Column(name = "message")
     private String message;
 
 
