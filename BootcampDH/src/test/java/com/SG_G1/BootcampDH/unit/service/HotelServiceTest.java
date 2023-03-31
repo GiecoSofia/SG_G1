@@ -43,17 +43,7 @@ public class HotelServiceTest {
         //assert
         Assertions.assertEquals(expected, result);
     }
-   /* @Test
-    @DisplayName("Testea que trae la excepción cuando la lista de hoteles viene vacia")
-    public void hotelRepositoryListWithEmptyTest(){
-        //arrange
-        List<HotelModel> expected = HotelFactory.hotelList();
-        //act
-        Mockito.lenient().when(hotelRepository.getHotels()).thenReturn(HotelFactory.hotelListNull());
 
-        //assert
-        Assertions.assertThrows(NullPointerException.class,() -> hotelService.hotelRepositoryList());
-    }*/
 
     @Test
     @DisplayName("Testeamos que nos traiga los hoteles disponibles en un rango de fechas y destino")
