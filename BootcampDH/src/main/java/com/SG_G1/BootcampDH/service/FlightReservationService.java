@@ -1,4 +1,4 @@
 package com.SG_G1.BootcampDH.service;
 
-public class HotelService {
+public class FlightReservationService {
 }
