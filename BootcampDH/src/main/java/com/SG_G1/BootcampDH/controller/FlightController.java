@@ -20,8 +20,8 @@ import java.util.List;
 @RestController
 public class FlightController {
 
-    @Autowired
-    private FlightService flightService;
+  /*  @Autowired
+    private FlightService flightService;*/
 
     /*@GetMapping("/api/v1/flights")
     public ResponseEntity<List<FlightModel>> listFlight(){

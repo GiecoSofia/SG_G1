@@ -1,5 +1,6 @@
 package com.SG_G1.BootcampDH.dto;
 
+import com.SG_G1.BootcampDH.model.HotelModel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,4 +22,5 @@ public class HotelModelDTO {
     private LocalDate from;
     private LocalDate to;
     private Boolean booking;
+
 }

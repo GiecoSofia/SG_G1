@@ -2,29 +2,23 @@ package com.SG_G1.BootcampDH.controller;
 
 
 import com.SG_G1.BootcampDH.dto.HotelModelDTO;
-import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive3;
 import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
 import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
-import com.SG_G1.BootcampDH.model.HotelModel;
-import com.SG_G1.BootcampDH.repository.IBookingRepository;
 import com.SG_G1.BootcampDH.service.BookingService;
 import com.SG_G1.BootcampDH.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import javax.validation.constraints.Pattern;
+
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @Validated
-
+@RequestMapping("/api/v1/hotels")
 public class HotelController {
     @Autowired
     HotelService hotelService;
@@ -34,20 +28,17 @@ public class HotelController {
 
     @PostMapping("/new")
     public ResponseEntity<MessageDTO> createHotel(@RequestBody HotelModelDTO hotelDTO) {
-        hotelService.saveEntity(hotelDTO);
-        MessageDTO message = MessageDTO.builder()
-                .message("Hotel dado de alta correctamente")
-                .build();
+        MessageDTO message = hotelService.saveEntity(hotelDTO);
         return ResponseEntity.ok(message);
     }
 
-    @PostMapping("/api/v1/hotels/new")
+    @PostMapping("/booking/new")
     public ResponseEntity<MessageDTO> createBooking (@RequestBody DTOresquest3 reserva) {
         var message = bookingService.saveEntity(reserva.getBooking());
         return ResponseEntity.ok(message);
     }
 
-    @PutMapping("/{hotelCode}")
+    @PutMapping("/edit/{hotelCode}")
     public ResponseEntity<MessageDTO> updateHotel(@PathVariable("hotelCode") String hotelCode,
                                                   @RequestBody HotelModelDTO hotelDTO) {
         MessageDTO message = hotelService.updateEntity(hotelCode, hotelDTO);
@@ -59,13 +50,22 @@ public class HotelController {
         return ResponseEntity.ok(hotelService.getAllEntities());
     }
 
-    @DeleteMapping("/{code}")
-    public ResponseEntity<MessageDTO> deleteHotel(@PathVariable String code) {
-        MessageDTO message = hotelService.deleteEntity(code);
+    @DeleteMapping("/delete/{hotelCode}")
+    public ResponseEntity<MessageDTO> deleteHotel(@PathVariable String hotelCode) {
+        MessageDTO message = hotelService.deleteEntity(hotelCode);
         return ResponseEntity.ok(message);
     }
 
+    @GetMapping("/date")
+    public List<HotelModelDTO> getAvailableHotels(
+            @RequestParam("dateFrom") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateFrom,
+            @RequestParam("dateTo") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateTo,
+            @RequestParam("destination") String destination) {
+
+        return hotelService.findDate(dateFrom, dateTo , destination);
     }
+
+}
 
    /* @GetMapping("/api/v1/hotels")
     public ResponseEntity<List<HotelModel>> listHotel(){
