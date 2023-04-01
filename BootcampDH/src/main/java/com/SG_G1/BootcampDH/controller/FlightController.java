@@ -17,13 +17,13 @@ import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 
-/*@RestController
+@RestController
 public class FlightController {
 
     @Autowired
     private FlightService flightService;
 
-    @GetMapping("/api/v1/flights")
+    /*@GetMapping("/api/v1/flights")
     public ResponseEntity<List<FlightModel>> listFlight(){
         List<FlightModel> flights = flightService.flightRepositoryList();
         if(flights.isEmpty()) {
@@ -50,6 +50,6 @@ public class FlightController {
     @PostMapping("/api/v1/flight-reservation")
     public ResponseEntity<DTOresponsive6> flightReservation(@RequestBody @Valid DTOrequest6 flightReservation){
         return new ResponseEntity<>(flightService.flightReservation(flightReservation), HttpStatus.OK);
-    }
+    }*/
 
-}*/
+}

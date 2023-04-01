@@ -13,7 +13,7 @@ public class FlightService implements ICrudService<FlightModelDTO, Integer> {
     }
 
     @Override
-    public MessageDTO updateEntity(Integer integer, FlightModelDTO DTO) {
+    public MessageDTO updateEntity(String integer, FlightModelDTO DTO) {
         return null;
     }
 
@@ -23,7 +23,7 @@ public class FlightService implements ICrudService<FlightModelDTO, Integer> {
     }
 
     @Override
-    public MessageDTO deleteEntity(Integer integer) {
+    public MessageDTO deleteEntity(String integer) {
         return null;
     }
 }

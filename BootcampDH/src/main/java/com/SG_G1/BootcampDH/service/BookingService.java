@@ -35,7 +35,7 @@ public class BookingService implements ICrudService<BookingModelDTO, Integer> {
     }
 
     @Override
-    public MessageDTO updateEntity(Integer integer, BookingModelDTO DTO) {
+    public MessageDTO updateEntity(String integer, BookingModelDTO DTO) {
         return null;
     }
 
@@ -45,7 +45,7 @@ public class BookingService implements ICrudService<BookingModelDTO, Integer> {
     }
 
     @Override
-    public MessageDTO deleteEntity(Integer integer) {
+    public MessageDTO deleteEntity(String integer) {
         return null;
     }
 }

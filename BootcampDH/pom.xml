@@ -12,7 +12,7 @@
 	<artifactId>BootcampDH</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>BootcampDH</name>
-	<description>Bootcamp Proyecto SrpingBoot</description>
+	<description>Bootcamp Proyecto SpringBoot</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -33,7 +33,7 @@
 		<dependency>
 			<groupId> org.hibernate.validator </groupId>
 			<artifactId> hibernate-validator </artifactId>
-			<version> 6.0.13.Final </version>
+			<version>8.0.0.Final</version>
 		</dependency>
 		<dependency>
 			<groupId> org.glassfish </groupId>

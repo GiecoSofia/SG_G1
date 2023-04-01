@@ -14,7 +14,7 @@ public class FlightReservationService implements ICrudService<FlightReservationM
     }
 
     @Override
-    public MessageDTO updateEntity(Integer integer, FlightReservationModelDTO DTO) {
+    public MessageDTO updateEntity(String integer, FlightReservationModelDTO DTO) {
         return null;
     }
 
@@ -24,7 +24,7 @@ public class FlightReservationService implements ICrudService<FlightReservationM
     }
 
     @Override
-    public MessageDTO deleteEntity(Integer integer) {
+    public MessageDTO deleteEntity(String integer) {
         return null;
     }
 }

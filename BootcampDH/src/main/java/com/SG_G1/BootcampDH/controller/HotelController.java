@@ -47,6 +47,24 @@ public class HotelController {
         return ResponseEntity.ok(message);
     }
 
+    @PutMapping("/{hotelCode}")
+    public ResponseEntity<MessageDTO> updateHotel(@PathVariable("hotelCode") String hotelCode,
+                                                  @RequestBody HotelModelDTO hotelDTO) {
+        MessageDTO message = hotelService.updateEntity(hotelCode, hotelDTO);
+        return ResponseEntity.ok(message);
+    }
+
+    @GetMapping("/hoteles")
+    public ResponseEntity<List<HotelModelDTO>> getAll(){
+        return ResponseEntity.ok(hotelService.getAllEntities());
+    }
+
+    @DeleteMapping("/{code}")
+    public ResponseEntity<MessageDTO> deleteHotel(@PathVariable String code) {
+        MessageDTO message = hotelService.deleteEntity(code);
+        return ResponseEntity.ok(message);
+    }
+
     }
 
    /* @GetMapping("/api/v1/hotels")
