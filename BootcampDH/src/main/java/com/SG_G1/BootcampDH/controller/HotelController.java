@@ -3,8 +3,7 @@ package com.SG_G1.BootcampDH.controller;
 
 import com.SG_G1.BootcampDH.dto.HotelModelDTO;
 import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
-import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
-import com.SG_G1.BootcampDH.service.BookingService;
+import com.SG_G1.BootcampDH.service.HotelBookingService;
 import com.SG_G1.BootcampDH.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -23,18 +22,12 @@ public class HotelController {
     @Autowired
     HotelService hotelService;
     @Autowired
-    BookingService bookingService;
+    HotelBookingService bookingService;
 
 
     @PostMapping("/new")
     public ResponseEntity<MessageDTO> createHotel(@RequestBody HotelModelDTO hotelDTO) {
         MessageDTO message = hotelService.saveEntity(hotelDTO);
-        return ResponseEntity.ok(message);
-    }
-
-    @PostMapping("/booking/new")
-    public ResponseEntity<MessageDTO> createBooking (@RequestBody DTOresquest3 reserva) {
-        var message = bookingService.saveEntity(reserva.getBooking());
         return ResponseEntity.ok(message);
     }
 
@@ -50,11 +43,6 @@ public class HotelController {
         return ResponseEntity.ok(hotelService.getAllEntities());
     }
 
-    @DeleteMapping("/delete/{hotelCode}")
-    public ResponseEntity<MessageDTO> deleteHotel(@PathVariable String hotelCode) {
-        MessageDTO message = hotelService.deleteEntity(hotelCode);
-        return ResponseEntity.ok(message);
-    }
 
     @GetMapping("/date")
     public List<HotelModelDTO> getAvailableHotels(
@@ -63,6 +51,12 @@ public class HotelController {
             @RequestParam("destination") String destination) {
 
         return hotelService.findDate(dateFrom, dateTo , destination);
+    }
+
+    @DeleteMapping("/delete/{code}")
+    public ResponseEntity<MessageDTO> deleteHotelByCode(@PathVariable String code) {
+        MessageDTO message = hotelService.deleteEntity(code);
+        return ResponseEntity.ok(message);
     }
 
 }

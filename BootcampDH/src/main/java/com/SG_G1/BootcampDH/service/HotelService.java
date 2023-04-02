@@ -14,7 +14,6 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 
@@ -29,7 +28,7 @@ public class HotelService implements ICrudService<HotelModelDTO, Integer> {
     public MessageDTO saveEntity(HotelModelDTO hotelDTO) {
         HotelModel existingHotel = hotelRepository.findByPlaceAndNameAndFromAndTo(hotelDTO.getPlace(), hotelDTO.getName(), hotelDTO.getFrom(), hotelDTO.getTo());
         if (existingHotel != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ya existe una reserva con características idénticas");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ya existe el hotel con características idénticas");
         }
 
         HotelModel hotel = mapper.map(hotelDTO, HotelModel.class);
@@ -46,13 +45,17 @@ public class HotelService implements ICrudService<HotelModelDTO, Integer> {
         HotelModel hotel = hotelRepository.findByCode(hotelCode)
                 .orElseThrow(() -> new ValidationParams("El hotel con el código " + hotelCode + " no existe"));
 
+        Long bookingsCount = hotelRepository.countBookingsByHotelCode(hotelCode);
+        if (bookingsCount > 0) {
+            return new MessageDTO("No se puede actualizar el hotel porque se encuentra en reserva");
+        }
+
         mapper.map(DTO, hotel);
         hotelRepository.save(hotel);
 
-        return MessageDTO.builder()
-                .message("Hotel modificado correctamente")
-                .build();
+        return new MessageDTO("Hotel modificado correctamente");
     }
+
 
     @Override
     public List<HotelModelDTO> getAllEntities() {
@@ -63,20 +66,13 @@ public class HotelService implements ICrudService<HotelModelDTO, Integer> {
                 .collect(Collectors.toList());
     }
 
-
     @Override
     public MessageDTO deleteEntity(String hotelCode) {
-        // Busca el hotel por código
-        HotelModel hotel = hotelRepository.findByCode(hotelCode)
-                .orElseThrow(() -> new ValidationParams("No se encontró ningún hotel con el código proporcionado"));
-
-        // Elimina el hotel de la base de datos
-        hotelRepository.delete(hotel);
-
-        // Crea un objeto MessageDTO con el mensaje de éxito y lo devuelve
-        return MessageDTO.builder()
-                .message("Hotel dado de baja correctamente")
-                .build();
+        if (hotelRepository.countBookingsByHotelCode(hotelCode) > 0) {
+            return new MessageDTO("No se puede eliminar el hotel porque se encuentra en reserva");
+        }
+        hotelRepository.deleteByCode(hotelCode);
+        return new MessageDTO("El hotel ha sido eliminado exitosamente");
     }
     public List<HotelModelDTO> findDate(LocalDate from, LocalDate to, String place) {
         List<HotelModel> availableHotels = hotelRepository.findByFromEqualsAndToEqualsAndPlaceEquals(from, to, place);
