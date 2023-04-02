@@ -26,19 +26,25 @@ public class HotelService implements ICrudService<HotelModelDTO, Integer> {
     ModelMapper mapper = new ModelMapper();
     @Override
     public MessageDTO saveEntity(HotelModelDTO hotelDTO) {
-        HotelModel existingHotel = hotelRepository.findByPlaceAndNameAndFromAndTo(hotelDTO.getPlace(), hotelDTO.getName(), hotelDTO.getFrom(), hotelDTO.getTo());
-        if (existingHotel != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ya existe el hotel con características idénticas");
+        boolean exists = hotelRepository.existsByPlaceAndNameAndFromAndTo(hotelDTO.getName(), hotelDTO.getPlace(), hotelDTO.getFrom(), hotelDTO.getTo());
+        if (exists) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ya existe un hotel con características idénticas en las reservas.");
         }
-
+        Long count = hotelRepository.countBookingsByHotelCode(hotelDTO.getCode());
+        if (count > 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El hotel está actualmente en una reserva.");
+        }
         HotelModel hotel = mapper.map(hotelDTO, HotelModel.class);
         hotelRepository.save(hotel);
-
-        MessageDTO message = MessageDTO.builder()
-                .message("Hotel dado de alta correctamente")
+        return MessageDTO.builder()
+                .message("El hotel se dio de alta correctamente.")
                 .build();
-        return message;
     }
+    /* el metodo countBookingsByHotelCode Busca todas las reservas que tengan el mismo código de hotel que se pasa como parámetro y
+    devuelve el número de resultados. Si el número de reservas es mayor que cero, entonces el hotel está actualmente
+    en una reserva y no debe dar de alta el hotel*/
+
+
 
     @Override
     public MessageDTO updateEntity(String hotelCode, HotelModelDTO DTO) {

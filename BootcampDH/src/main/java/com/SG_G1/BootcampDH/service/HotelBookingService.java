@@ -10,6 +10,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,12 +21,8 @@ public class HotelBookingService {
     @Autowired
     IHotelBookingRepository bookingRepository;
     ModelMapper mapper = new ModelMapper();
-    @Autowired
-    IPeopleRepository peopleRepository;
 
-
-
-
+    @Transactional
     public MessageDTO saveEntity(BookingModelDTO DTO) {
         BookingModel booking = mapper.map(DTO, BookingModel.class);
 
