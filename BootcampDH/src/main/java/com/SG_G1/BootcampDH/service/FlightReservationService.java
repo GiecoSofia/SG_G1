@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FlightReservationService{
@@ -64,7 +65,15 @@ public class FlightReservationService{
 
 
     public List<FlightReservationModelDTO> getAllEntities() {
-        return null;
+
+        List<FlightReservationModel> list = flightReservationRepository.findAll();
+
+        if (list.isEmpty()) {
+            throw new ValidationParams("No hay reservas de vuelos");
+        }
+        return list.stream()
+                .map(flightList -> mapper.map(flightList, FlightReservationModelDTO.class))
+                .collect(Collectors.toList());
     }
 
 

@@ -16,7 +16,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FlightService {
@@ -67,7 +69,22 @@ public class FlightService {
 
 
     public List<FlightModelDTO> getAllEntities() {
-        return null;
+
+        var list = flightsRepository.findAll();
+        return list.stream().map(
+                        flight -> mapper.map(flight, FlightModelDTO.class)
+                )
+                .collect(Collectors.toList());
+    }
+
+    public List<FlightModelDTO> findDate(LocalDate from, LocalDate to, String destination, String origin) {
+        List<FlightModel> availableFlight = flightsRepository.findByFromEqualsAndToEqualsAndDestinationEqualsAndOriginEquals(from, to, destination, origin);
+        if (availableFlight.isEmpty()) {
+            throw new ValidationParams("No hay vuelos disponibles para las fechas y el destino u origen indicados");
+        }
+        return availableFlight.stream()
+                .map(flight -> mapper.map(flight, FlightModelDTO.class))
+                .collect(Collectors.toList());
     }
 
 

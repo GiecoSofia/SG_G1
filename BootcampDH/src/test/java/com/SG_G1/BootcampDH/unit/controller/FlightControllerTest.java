@@ -5,7 +5,6 @@ import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive6;
 import com.SG_G1.BootcampDH.dto.resquest.DTOrequest6;
 import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
 import com.SG_G1.BootcampDH.model.FlightModel;
-import com.SG_G1.BootcampDH.repository.FlightRepository;
 import com.SG_G1.BootcampDH.service.FlightService;
 import com.SG_G1.BootcampDH.utils.*;
 import org.junit.jupiter.api.Assertions;

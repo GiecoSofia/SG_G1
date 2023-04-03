@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 public interface IFlightRepository extends JpaRepository<FlightModel,Integer> {
@@ -20,6 +21,9 @@ public interface IFlightRepository extends JpaRepository<FlightModel,Integer> {
     en una reserva y no debe eliminarse o actualizarse.*/
 
     Optional<FlightModel> findByCode(String code);
+
+    List<FlightModel> findByFromEqualsAndToEqualsAndDestinationEqualsAndOriginEquals(LocalDate from, LocalDate to, String destination, String origin);
+
 
 
 }

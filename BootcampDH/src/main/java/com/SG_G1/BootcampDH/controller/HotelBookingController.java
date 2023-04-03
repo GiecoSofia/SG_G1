@@ -1,10 +1,13 @@
 package com.SG_G1.BootcampDH.controller;
 
+import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive3;
+import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive6;
 import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
 import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
 import com.SG_G1.BootcampDH.model.BookingModel;
 import com.SG_G1.BootcampDH.service.HotelBookingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,9 +34,8 @@ public class HotelBookingController {
     }
 
     @GetMapping
-    public ResponseEntity<List<BookingModel>> getAllBookings() {
-        List<BookingModel> bookings = bookingService.getAllEntities();
-        return ResponseEntity.ok(bookings);
+    public ResponseEntity <DTOresponsive3> getAllBookings() {
+        return new ResponseEntity <DTOresponsive3> (new DTOresponsive3(bookingService.getAllEntities()), HttpStatus.OK);
     }
 
     @DeleteMapping("delete/{id}")

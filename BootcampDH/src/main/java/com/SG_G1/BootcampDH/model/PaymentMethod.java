@@ -23,6 +23,6 @@ public class PaymentMethod {
     @Column(name= "number")
     private String number;
     @Column(name = "dues")
-    private int dues;
+    private Integer dues;
 
 }
