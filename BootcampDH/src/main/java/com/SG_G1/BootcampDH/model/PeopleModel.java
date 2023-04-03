@@ -37,6 +37,5 @@ public class PeopleModel {
     /*@JoinColumn(foreignKey = @ForeignKey(name = "fk_PeopleModel_booking_id"), name="booking_id", referencedColumnName = "id", nullable = false)*/
   /*  private BookingModel bookingModel;*/
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private FlightReservationModel flightReservationModel;
+
 }

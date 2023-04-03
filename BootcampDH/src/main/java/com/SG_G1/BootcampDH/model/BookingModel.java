@@ -32,6 +32,9 @@ public class BookingModel {
     @OneToMany(cascade ={CascadeType.ALL}, fetch = FetchType.LAZY)
     private List<PeopleModel> people;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade ={CascadeType.ALL}, fetch = FetchType.LAZY)
     private PaymentMethod paymentMethod;
+
+    @OneToOne(cascade ={CascadeType.ALL}, fetch = FetchType.LAZY)
+    private HotelModel id_hotel;
 }

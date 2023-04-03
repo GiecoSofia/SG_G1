@@ -23,8 +23,8 @@ public class HotelBookingController {
         return ResponseEntity.ok(message);
     }
 
-    @PutMapping("/edit/{id}")
-    public ResponseEntity<MessageDTO> updateBooking(@PathVariable("id") Integer id,
+    @PutMapping("/edit")
+    public ResponseEntity<MessageDTO> updateBooking(@RequestParam("id") Integer id,
                                                     @RequestBody DTOresquest3 reservation) {
        var message = bookingService.updateEntity(id, reservation.getBooking());
         return ResponseEntity.ok(message);

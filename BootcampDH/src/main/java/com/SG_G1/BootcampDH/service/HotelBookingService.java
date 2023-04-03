@@ -5,6 +5,7 @@ import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
 import com.SG_G1.BootcampDH.exception.ValidationParams;
 import com.SG_G1.BootcampDH.model.BookingModel;
 import com.SG_G1.BootcampDH.repository.IHotelBookingRepository;
+import com.SG_G1.BootcampDH.repository.IHotelRepository;
 import com.SG_G1.BootcampDH.repository.IPeopleRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,11 +21,16 @@ public class HotelBookingService {
 
     @Autowired
     IHotelBookingRepository bookingRepository;
+
+    @Autowired
+    IHotelRepository hotelRepository;
     ModelMapper mapper = new ModelMapper();
 
     @Transactional
     public MessageDTO saveEntity(BookingModelDTO DTO) {
         BookingModel booking = mapper.map(DTO, BookingModel.class);
+
+
 
         // Comprobar si existe una reserva con idénticas características
         Optional<BookingModel> existingBooking = bookingRepository.findByDateFromAndDateToAndDestinationAndHotelCodeAndPeopleAmountAndRoomType(
@@ -33,7 +39,7 @@ public class HotelBookingService {
 
         if (existingBooking.isPresent()) {
             // Comprobar si existe una reserva con idénticas características
-            return new MessageDTO("Ya existe una reserva con características idénticas.");
+            throw new ValidationParams("Ya existe una reserva con características idénticas.");
         } else {
             //Si no existe una reserva de idénticas características, graba la nueva reserva
             bookingRepository.save(booking);

@@ -25,26 +25,26 @@ public class HotelController {
     HotelBookingService bookingService;
 
 
-    @PostMapping("/new")
+    @PostMapping("/new/")
     public ResponseEntity<MessageDTO> createHotel(@RequestBody HotelModelDTO hotelDTO) {
         MessageDTO message = hotelService.saveEntity(hotelDTO);
         return ResponseEntity.ok(message);
     }
 
-    @PutMapping("/edit/{hotelCode}")
-    public ResponseEntity<MessageDTO> updateHotel(@PathVariable("hotelCode") String hotelCode,
+    @PutMapping("/edit")
+    public ResponseEntity<MessageDTO> updateHotel(@RequestParam("hotelCode") String hotelCode,
                                                   @RequestBody HotelModelDTO hotelDTO) {
         MessageDTO message = hotelService.updateEntity(hotelCode, hotelDTO);
         return ResponseEntity.ok(message);
     }
 
-    @GetMapping("/hoteles")
+    @GetMapping("/")
     public ResponseEntity<List<HotelModelDTO>> getAll(){
         return ResponseEntity.ok(hotelService.getAllEntities());
     }
 
 
-    @GetMapping("/date")
+    @GetMapping
     public List<HotelModelDTO> getAvailableHotels(
             @RequestParam("dateFrom") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateFrom,
             @RequestParam("dateTo") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateTo,

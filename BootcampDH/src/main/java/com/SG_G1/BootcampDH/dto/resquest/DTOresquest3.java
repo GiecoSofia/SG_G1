@@ -22,5 +22,5 @@ public class DTOresquest3 {
     private String userName;
 
     private @Valid BookingModelDTO booking;
-   /* private PaymentMethodDTO paymentMethod;*/
+
 }

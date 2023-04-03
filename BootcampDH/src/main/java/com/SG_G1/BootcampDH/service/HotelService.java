@@ -18,13 +18,13 @@ import java.util.stream.Collectors;
 
 
 @Service
-public class HotelService implements ICrudService<HotelModelDTO, Integer> {
+public class HotelService  {
 
     @Autowired
     IHotelRepository hotelRepository;
 
     ModelMapper mapper = new ModelMapper();
-    @Override
+
     public MessageDTO saveEntity(HotelModelDTO hotelDTO) {
         HotelModel existingHotel = hotelRepository.findByPlaceAndNameAndFromAndTo(hotelDTO.getPlace(), hotelDTO.getName(), hotelDTO.getFrom(), hotelDTO.getTo());
         if (existingHotel != null) {
@@ -46,15 +46,12 @@ public class HotelService implements ICrudService<HotelModelDTO, Integer> {
 
 
 
-    @Override
+
     public MessageDTO updateEntity(String hotelCode, HotelModelDTO DTO) {
         HotelModel hotel = hotelRepository.findByCode(hotelCode)
                 .orElseThrow(() -> new ValidationParams("El hotel con el código " + hotelCode + " no existe"));
 
-        Long bookingsCount = hotelRepository.countBookingsByHotelCode(hotelCode);
-        if (bookingsCount > 0) {
-            return new MessageDTO("No se puede actualizar el hotel porque se encuentra en reserva");
-        }
+
 
         mapper.map(DTO, hotel);
         hotelRepository.save(hotel);
@@ -63,7 +60,7 @@ public class HotelService implements ICrudService<HotelModelDTO, Integer> {
     }
 
 
-    @Override
+
     public List<HotelModelDTO> getAllEntities() {
         var list = hotelRepository.findAll();
         return list.stream().map(
@@ -72,7 +69,7 @@ public class HotelService implements ICrudService<HotelModelDTO, Integer> {
                 .collect(Collectors.toList());
     }
 
-    @Override
+
     public MessageDTO deleteEntity(String hotelCode) {
         if (hotelRepository.countBookingsByHotelCode(hotelCode) > 0) {
             return new MessageDTO("No se puede eliminar el hotel porque se encuentra en reserva");

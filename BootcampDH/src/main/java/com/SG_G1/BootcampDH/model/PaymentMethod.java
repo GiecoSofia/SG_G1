@@ -25,9 +25,4 @@ public class PaymentMethod {
     @Column(name = "dues")
     private int dues;
 
-    @OneToOne(mappedBy = "paymentMethod",fetch = FetchType.LAZY)
-    private BookingModel bookingModel;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    private FlightReservationModel flightReservationModel;
 }

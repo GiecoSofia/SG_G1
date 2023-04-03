@@ -18,6 +18,9 @@ public interface IHotelRepository extends JpaRepository<HotelModel,Integer> {
     devuelve el número de resultados. Si el número de reservas es mayor que cero, entonces el hotel está actualmente
     en una reserva y no debe eliminarse o actualizarse.*/
 
+
+
+
     void deleteByCode(String code);
     Optional<HotelModel> findByCode(String code);
 
