@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 public interface IFlightRepository extends JpaRepository<FlightModel,Integer> {
@@ -19,7 +20,13 @@ public interface IFlightRepository extends JpaRepository<FlightModel,Integer> {
     devuelve el número de resultados. Si el número de reservas es mayor que cero, entonces el hotel está actualmente
     en una reserva y no debe eliminarse o actualizarse.*/
 
+    void deleteByCode(String code);
+
+    boolean existsByCode(String code);
     Optional<FlightModel> findByCode(String code);
+
+    List<FlightModel> findByFromEqualsAndToEqualsAndDestinationEqualsAndOriginEquals(LocalDate from, LocalDate to, String destination, String origin);
+
 
 
 }

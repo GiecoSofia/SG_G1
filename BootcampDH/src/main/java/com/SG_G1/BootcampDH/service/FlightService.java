@@ -16,7 +16,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class FlightService {
@@ -67,11 +70,41 @@ public class FlightService {
 
 
     public List<FlightModelDTO> getAllEntities() {
-        return null;
+
+        var list = flightsRepository.findAll();
+        return list.stream().map(
+                        flight -> mapper.map(flight, FlightModelDTO.class)
+                )
+                .collect(Collectors.toList());
     }
 
+    public List<FlightModelDTO> findDate(LocalDate from, LocalDate to, String destination, String origin) {
+        List<FlightModel> availableFlight = flightsRepository.findByFromEqualsAndToEqualsAndDestinationEqualsAndOriginEquals(from, to, destination, origin);
+        if (availableFlight.isEmpty()) {
+            throw new ValidationParams("No hay vuelos disponibles para las fechas y el destino u origen indicados");
+        }
+        return availableFlight.stream()
+                .map(flight -> mapper.map(flight, FlightModelDTO.class))
+                .collect(Collectors.toList());
+    }
 
-    public MessageDTO deleteEntity(String integer) {
-        return null;
+    @Transactional
+    public MessageDTO deleteEntity(String flightNumber) {
+
+        if (flightsRepository.countFlightsReservationByHotelCode(flightNumber) > 0) {
+            return new MessageDTO("No se puede eliminar el vuelo porque se encuentra en reserva");
+        }
+
+        if(flightsRepository.existsByCode(flightNumber)) {
+            flightsRepository.deleteByCode(flightNumber);
+            return MessageDTO.builder()
+                    .message("Se elimino el vuelo con Number " + flightNumber)
+                    .build();
+        }
+        else{
+            throw new ValidationParams("No se pudo encontrar un vuelo con ese codigo");
+        }
+
     }
 }
+

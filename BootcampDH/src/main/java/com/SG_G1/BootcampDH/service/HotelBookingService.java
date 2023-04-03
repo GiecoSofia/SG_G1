@@ -57,13 +57,13 @@ public class HotelBookingService {
         bookingRepository.save(booking);
         return new MessageDTO("La reserva se modifico correctamente.");
     }
-    public List<BookingModel> getAllEntities() {
+    public List<BookingModelDTO> getAllEntities() {
         List<BookingModel> list = bookingRepository.findAll();
         if (list.isEmpty()) {
             throw new ValidationParams("No hay reservas de hoteles");
         }
         return list.stream()
-                .map(bookingModel -> mapper.map(bookingModel, BookingModel.class))
+                .map(bookingModel -> mapper.map(bookingModel, BookingModelDTO.class))
                 .collect(Collectors.toList());
     }
 

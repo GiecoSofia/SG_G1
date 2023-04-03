@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -70,13 +71,6 @@ public class HotelService  {
     }
 
 
-    public MessageDTO deleteEntity(String hotelCode) {
-        if (hotelRepository.countBookingsByHotelCode(hotelCode) > 0) {
-            return new MessageDTO("No se puede eliminar el hotel porque se encuentra en reserva");
-        }
-        hotelRepository.deleteByCode(hotelCode);
-        return new MessageDTO("El hotel ha sido eliminado exitosamente");
-    }
     public List<HotelModelDTO> findDate(LocalDate from, LocalDate to, String place) {
         List<HotelModel> availableHotels = hotelRepository.findByFromEqualsAndToEqualsAndPlaceEquals(from, to, place);
         if (availableHotels.isEmpty()) {
@@ -85,6 +79,23 @@ public class HotelService  {
         return availableHotels.stream()
                 .map(hotel -> mapper.map(hotel, HotelModelDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public MessageDTO deleteEntity(String hotelCode) {
+        if (hotelRepository.countBookingsByHotelCode(hotelCode) > 0) {
+            return new MessageDTO("No se puede eliminar el hotel porque se encuentra en reserva");
+        }
+
+        if(hotelRepository.existsByCode(hotelCode)) {
+            hotelRepository.deleteByCode(hotelCode);
+            return MessageDTO.builder()
+                    .message("Se elimino el hotel con CODE " + hotelCode)
+                    .build();
+        }
+        else{
+            throw new ValidationParams("No se pudo encontrar un hotel con ese codigo");
+        }
     }
     }
 

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FlightReservationService{
@@ -64,11 +65,22 @@ public class FlightReservationService{
 
 
     public List<FlightReservationModelDTO> getAllEntities() {
-        return null;
+
+        List<FlightReservationModel> list = flightReservationRepository.findAll();
+
+        if (list.isEmpty()) {
+            throw new ValidationParams("No hay reservas de vuelos");
+        }
+        return list.stream()
+                .map(flightList -> mapper.map(flightList, FlightReservationModelDTO.class))
+                .collect(Collectors.toList());
     }
 
 
-    public MessageDTO deleteEntity(String integer) {
-        return null;
+    public MessageDTO deleteEntity(Integer id) {
+        FlightReservationModel reservation = flightReservationRepository.findById(id)
+                .orElseThrow(() -> new ValidationParams("La reserva con el id " + id + " no existe"));
+        flightReservationRepository.delete(reservation);
+        return new MessageDTO("La reserva se eliminó correctamente.");
     }
 }

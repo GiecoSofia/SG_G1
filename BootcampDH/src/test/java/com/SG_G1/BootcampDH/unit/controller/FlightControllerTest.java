@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //package com.SG_G1.BootcampDH.unit.controller;
 //
 //import com.SG_G1.BootcampDH.controller.FlightController;
@@ -26,6 +27,35 @@
 //@ExtendWith(MockitoExtension.class)
 //public class FlightControllerTest {
     /*@Mock
+=======
+package com.SG_G1.BootcampDH.unit.controller;
+
+import com.SG_G1.BootcampDH.controller.FlightController;
+import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive6;
+import com.SG_G1.BootcampDH.dto.resquest.DTOrequest6;
+import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
+import com.SG_G1.BootcampDH.model.FlightModel;
+import com.SG_G1.BootcampDH.service.FlightService;
+import com.SG_G1.BootcampDH.utils.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+@ExtendWith(MockitoExtension.class)
+public class FlightControllerTest {
+    @Mock
+>>>>>>> 022cae696ee9cc94c315ab18b20de9dffc8cb87f
     FlightService servicio;
 
     @InjectMocks

@@ -35,6 +35,7 @@ INSERT INTO flight (code, origin, destination, seat_type, price, date_from, date
 VALUES( "MEPI-9986","Medellín","Puerto Iguazú","Business",1640.0,"2022/04/17","2022/05/02");
 
 
+
 INSERT INTO hotel (code, name, place, type, price, date_from, date_to, booking)
 VALUES( "CH-0002","Cataratas Hotel","Puerto Iguazú","Doble",6300.0,"2022/02/10","2022/03/20",false);
 

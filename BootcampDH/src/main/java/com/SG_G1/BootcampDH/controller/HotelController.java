@@ -53,44 +53,13 @@ public class HotelController {
         return hotelService.findDate(dateFrom, dateTo , destination);
     }
 
-    @DeleteMapping("/delete/{code}")
-    public ResponseEntity<MessageDTO> deleteHotelByCode(@PathVariable String code) {
+    @DeleteMapping("/delete")
+    public ResponseEntity<MessageDTO> deleteHotelByCode(@RequestParam("hotelCode") String code) {
         MessageDTO message = hotelService.deleteEntity(code);
         return ResponseEntity.ok(message);
     }
 
 }
 
-   /* @GetMapping("/api/v1/hotels")
-    public ResponseEntity<List<HotelModel>> listHotel(){
-        List<HotelModel> hoteles = hotelService.hotelRepositoryList();
-        if(hoteles.isEmpty()){
-            throw new NullPointerException();
-
-        }
-        return new ResponseEntity<>(hoteles, HttpStatus.OK);
-    }
-
-    @GetMapping ("/api/v1/hotelss")
-    public ResponseEntity<List<HotelModel>> listHotelDips(@RequestParam ("dateFrom") @DateTimeFormat(pattern = "dd/MM/yyyy")  LocalDate dateFrom ,
-                                                          @RequestParam ("dateTo") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateTo,
-                                                          @RequestParam String destination){
-
-
-
-
-
-        List<HotelModel> hoteles = hotelService.hotelRepositoryListDisp(dateFrom,dateTo, destination);
-        if(hoteles.isEmpty()){
-            throw new NullPointerException();
-
-        }
-        return new ResponseEntity<>(hoteles, HttpStatus.OK);
-    }
-    //Us006
-    @PostMapping("/api/v1/booking")
-    public ResponseEntity<DTOresponsive3> booking(@RequestBody @Valid DTOresquest3 booking){
-        return new ResponseEntity<>(hotelService.booking(booking), HttpStatus.OK);
-    }*/
 
 

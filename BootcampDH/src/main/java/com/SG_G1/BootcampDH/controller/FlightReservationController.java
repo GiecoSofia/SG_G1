@@ -1,17 +1,25 @@
 package com.SG_G1.BootcampDH.controller;
 
 
+import com.SG_G1.BootcampDH.dto.FlightReservationModelDTO;
 import com.SG_G1.BootcampDH.dto.HotelModelDTO;
+import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive3;
+import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive6;
 import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
 import com.SG_G1.BootcampDH.dto.resquest.DTOrequest6;
 import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
+import com.SG_G1.BootcampDH.model.BookingModel;
+import com.SG_G1.BootcampDH.model.FlightReservationModel;
 import com.SG_G1.BootcampDH.service.FlightReservationService;
 import com.SG_G1.BootcampDH.service.FlightService;
 import com.SG_G1.BootcampDH.service.HotelBookingService;
 import com.SG_G1.BootcampDH.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/flight-reservation")
@@ -35,4 +43,13 @@ public class FlightReservationController {
         return ResponseEntity.ok(message);
     }
 
+    @GetMapping
+    public ResponseEntity <DTOresponsive6> getAllBookings() {
+        return new ResponseEntity <DTOresponsive6> (new DTOresponsive6(flightService.getAllEntities()), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/delete/")
+    public ResponseEntity<MessageDTO> deleteBooking(@RequestParam Integer id) {
+        return ResponseEntity.ok(flightService.deleteEntity(id));
+    }
 }

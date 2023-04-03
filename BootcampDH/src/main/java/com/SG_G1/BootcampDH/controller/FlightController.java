@@ -27,6 +27,7 @@ public class FlightController {
     @Autowired
     private FlightService flightService;
 
+
     @PostMapping("/new")
     public ResponseEntity<MessageDTO> createHotel(@RequestBody FlightModelDTO flightDTO) {
         MessageDTO message = flightService.saveEntity(flightDTO);
@@ -39,33 +40,29 @@ public class FlightController {
         return ResponseEntity.ok(message);
     }
 
-    /*@GetMapping("/api/v1/flights")
-    public ResponseEntity<List<FlightModel>> listFlight(){
-        List<FlightModel> flights = flightService.flightRepositoryList();
-        if(flights.isEmpty()) {
-            throw new NullPointerException();
-        }
-        return new ResponseEntity<>(flights, HttpStatus.OK);
+    @GetMapping("/")
+    public ResponseEntity<List<FlightModelDTO>> getAll(){
+
+        return ResponseEntity.ok(flightService.getAllEntities());
     }
 
-    @GetMapping("/api/v1/flightss")
-    public ResponseEntity<List<FlightModel>> listFlightDisp(@RequestParam ("dateFrom") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateFrom,
-                                                            @RequestParam ("dateTo") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateTo,
-                                                            @RequestParam String origin,
-                                                            @RequestParam String destination){
+    @GetMapping
+    public List<FlightModelDTO> getAvailableFlight(
+            @RequestParam("dateFrom") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateFrom,
+            @RequestParam("dateTo") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate dateTo,
+            @RequestParam("destination") String destination, @RequestParam("origin") String origin) {
 
-        List<FlightModel> flights = flightService.flightRepositoryListDisp(dateFrom,dateTo,origin, destination);
-        if(flights.isEmpty()) {
-            throw new NullPointerException();
-        }
-
-
-        return new ResponseEntity<>(flights, HttpStatus.OK);
+        return flightService.findDate(dateFrom, dateTo, destination, origin);
     }
 
-    @PostMapping("/api/v1/flight-reservation")
-    public ResponseEntity<DTOresponsive6> flightReservation(@RequestBody @Valid DTOrequest6 flightReservation){
-        return new ResponseEntity<>(flightService.flightReservation(flightReservation), HttpStatus.OK);
-    }*/
+    @DeleteMapping("/delete")
+    public ResponseEntity<MessageDTO> deleteFlightByNumber(@RequestParam("flightNumber") String code) {
+        MessageDTO message = flightService.deleteEntity(code);
+        return ResponseEntity.ok(message);
+    }
+
+
+
+
 
 }
