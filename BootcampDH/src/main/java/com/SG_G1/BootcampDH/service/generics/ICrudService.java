@@ -8,7 +8,7 @@ public interface ICrudService<T, ID> {
 
     MessageDTO saveEntity(T DTO);
 
-    MessageDTO updateEntity(String id, T DTO);
+    MessageDTO updateEntity(T id, T DTO);
 
     List<T> getAllEntities();
 

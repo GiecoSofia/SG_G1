@@ -33,4 +33,5 @@ public class FlightReservationModelDTO {
     private int seats;
     private String seatType;
     private List<@Valid PeopleModel> people;
+    private PaymentMethodDTO paymentMethod;
 }

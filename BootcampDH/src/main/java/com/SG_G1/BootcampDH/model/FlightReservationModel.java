@@ -31,10 +31,10 @@ public class FlightReservationModel {
     @Column(name = "seat_type")
     private String seatType;
 
-    @OneToMany(mappedBy = "flightReservationModel", cascade = CascadeType.ALL)
+    @OneToMany(cascade ={CascadeType.ALL}, fetch = FetchType.LAZY)
     private List<PeopleModel> people;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade ={CascadeType.ALL}, fetch = FetchType.LAZY)
     private PaymentMethod paymentMethod;
 
 
