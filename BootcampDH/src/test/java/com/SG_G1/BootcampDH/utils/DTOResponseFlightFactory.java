@@ -1,6 +1,6 @@
 package com.SG_G1.BootcampDH.utils;
 
-import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive6;
+import com.SG_G1.BootcampDH.dto.responsive.FlightReservationDTO;
 import com.SG_G1.BootcampDH.model.FlightReservationModel;
 import com.SG_G1.BootcampDH.model.PeopleModel;
 import com.SG_G1.BootcampDH.model.StatusCode;
@@ -10,8 +10,8 @@ import java.util.List;
 
 public class DTOResponseFlightFactory {
 
-    public static DTOresponsive6 DTOResponsive6() {
-        return DTOresponsive6.builder()
+    public static FlightReservationDTO DTOResponsive6() {
+        return FlightReservationDTO.builder()
                 .userName("arjona@gmail.com")
                 .total(51240.0)
                 .flightReservation(flightReservation())

@@ -6,7 +6,6 @@ import com.SG_G1.BootcampDH.exception.ValidationParams;
 import com.SG_G1.BootcampDH.model.BookingModel;
 import com.SG_G1.BootcampDH.repository.IHotelBookingRepository;
 import com.SG_G1.BootcampDH.repository.IHotelRepository;
-import com.SG_G1.BootcampDH.repository.IPeopleRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

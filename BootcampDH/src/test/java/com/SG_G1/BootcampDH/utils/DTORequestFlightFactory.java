@@ -1,6 +1,6 @@
 package com.SG_G1.BootcampDH.utils;
 
-import com.SG_G1.BootcampDH.dto.resquest.DTOrequest6;
+import com.SG_G1.BootcampDH.dto.resquest.FlightRequestDTO;
 import com.SG_G1.BootcampDH.model.FlightReservationModel;
 import com.SG_G1.BootcampDH.model.PaymentMethod;
 import com.SG_G1.BootcampDH.model.PeopleModel;
@@ -8,13 +8,10 @@ import com.SG_G1.BootcampDH.model.PeopleModel;
 import java.time.LocalDate;
 import java.util.List;
 
-import static com.SG_G1.BootcampDH.utils.DTOResponseFlightFactory.flightReservation;
-import static com.SG_G1.BootcampDH.utils.DTOResponseFlightFactory.peopleDTO;
-
 public class DTORequestFlightFactory {
 
-    public static DTOrequest6 DTORequest6(){
-        return DTOrequest6.builder()
+    public static FlightRequestDTO DTORequest6(){
+        return FlightRequestDTO.builder()
                 .userName("arjona@gmail.com")
                 .flightReservation(flightReservation())
                 .paymentMethod(paymentMethod())

@@ -1,22 +1,13 @@
 package com.SG_G1.BootcampDH.controller;
 
 import com.SG_G1.BootcampDH.dto.FlightModelDTO;
-import com.SG_G1.BootcampDH.dto.HotelModelDTO;
-import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive3;
-import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive6;
 import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
-import com.SG_G1.BootcampDH.dto.resquest.DTOrequest6;
-import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
-import com.SG_G1.BootcampDH.model.FlightModel;
-import com.SG_G1.BootcampDH.model.HotelModel;
 import com.SG_G1.BootcampDH.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 

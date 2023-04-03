@@ -128,18 +128,12 @@
 =======
 package com.SG_G1.BootcampDH.unit.controller;
 
-import com.SG_G1.BootcampDH.controller.FlightController;
 import com.SG_G1.BootcampDH.controller.HotelController;
-import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive3;
-import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
-import com.SG_G1.BootcampDH.exception.ValidationParams;
-import com.SG_G1.BootcampDH.model.FlightModel;
+import com.SG_G1.BootcampDH.dto.resquest.HotelRequestDTO;
 import com.SG_G1.BootcampDH.model.HotelModel;
-import com.SG_G1.BootcampDH.service.FlightService;
 import com.SG_G1.BootcampDH.service.HotelService;
 import com.SG_G1.BootcampDH.utils.DTORequestHotelFactory;
 import com.SG_G1.BootcampDH.utils.DTOResponseHotelFactory;
-import com.SG_G1.BootcampDH.utils.FlightFactory;
 import com.SG_G1.BootcampDH.utils.HotelFactory;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -238,7 +232,7 @@ public class HotelControllerTest {
     @DisplayName("Testeamos cuando se da de alta la nueva reserva")
     public void hotelReservationTest() {
         //arrange
-        DTOresquest3 params = DTORequestHotelFactory.DTORequest3();
+        HotelRequestDTO params = DTORequestHotelFactory.DTORequest3();
         var expected =  new ResponseEntity<>(DTOResponseHotelFactory.DTOResponsive3(), HttpStatus.OK);
 
         //act

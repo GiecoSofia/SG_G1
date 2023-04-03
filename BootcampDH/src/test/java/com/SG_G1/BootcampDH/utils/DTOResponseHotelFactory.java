@@ -1,15 +1,14 @@
 package com.SG_G1.BootcampDH.utils;
 
-import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive3;
-import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive6;
+import com.SG_G1.BootcampDH.dto.responsive.HotelReservationDTO;
 import com.SG_G1.BootcampDH.model.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public class DTOResponseHotelFactory {
-    public static DTOresponsive3 DTOResponsive3() {
-        return DTOresponsive3.builder()
+    public static HotelReservationDTO DTOResponsive3() {
+        return HotelReservationDTO.builder()
                 .userName("arjonamiguel@gmail.com")
                 .total(2321790.0)
                 .booking(booking())

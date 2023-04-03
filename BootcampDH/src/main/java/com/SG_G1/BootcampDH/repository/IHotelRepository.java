@@ -19,8 +19,6 @@ public interface IHotelRepository extends JpaRepository<HotelModel,Integer> {
     en una reserva y no debe eliminarse o actualizarse.*/
 
 
-
-
     void deleteByCode(String code);
 
     boolean existsByCode(String code);

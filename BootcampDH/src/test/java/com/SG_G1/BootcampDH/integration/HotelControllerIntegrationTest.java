@@ -1,12 +1,11 @@
 package com.SG_G1.BootcampDH.integration;
 
-import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive3;
-import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
+import com.SG_G1.BootcampDH.dto.responsive.HotelReservationDTO;
+import com.SG_G1.BootcampDH.dto.resquest.HotelRequestDTO;
 import com.SG_G1.BootcampDH.model.HotelModel;
 import com.SG_G1.BootcampDH.utils.DTORequestHotelFactory;
 import com.SG_G1.BootcampDH.utils.DTOResponseHotelFactory;
 import com.SG_G1.BootcampDH.utils.HotelFactory;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -24,7 +23,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -107,10 +105,10 @@ public class HotelControllerIntegrationTest {
 
         // Arrange
         //Params
-        DTOresquest3 params = DTORequestHotelFactory.DTORequest3();
+        HotelRequestDTO params = DTORequestHotelFactory.DTORequest3();
 
         //Expected
-        DTOresponsive3 expected = DTOResponseHotelFactory.DTOResponsive3();
+        HotelReservationDTO expected = DTOResponseHotelFactory.DTOResponsive3();
 
         // Request
         MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/api/v1/booking")

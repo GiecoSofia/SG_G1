@@ -1,19 +1,5 @@
 package com.SG_G1.BootcampDH.serviceAnt;
 
-import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive6;
-import com.SG_G1.BootcampDH.dto.resquest.DTOrequest6;
-import com.SG_G1.BootcampDH.exception.ValidationParams;
-import com.SG_G1.BootcampDH.model.FlightModel;
-import com.SG_G1.BootcampDH.model.StatusCode;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-
-import static java.time.temporal.ChronoUnit.DAYS;
-
 /*
 @Service
 public class FlightService {

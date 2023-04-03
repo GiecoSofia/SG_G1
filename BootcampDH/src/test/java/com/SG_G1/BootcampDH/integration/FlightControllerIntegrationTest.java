@@ -1,11 +1,8 @@
 package com.SG_G1.BootcampDH.integration;
 
-import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive3;
-import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive6;
-import com.SG_G1.BootcampDH.dto.resquest.DTOrequest6;
-import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
+import com.SG_G1.BootcampDH.dto.responsive.FlightReservationDTO;
+import com.SG_G1.BootcampDH.dto.resquest.FlightRequestDTO;
 import com.SG_G1.BootcampDH.model.FlightModel;
-import com.SG_G1.BootcampDH.model.HotelModel;
 import com.SG_G1.BootcampDH.utils.*;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -107,9 +104,9 @@ public class FlightControllerIntegrationTest {
 
             // Arrange
             //Params
-            DTOrequest6 params = DTORequestFlightFactory.DTORequest6();
+            FlightRequestDTO params = DTORequestFlightFactory.DTORequest6();
             //Expected
-            DTOresponsive6 expected = DTOResponseFlightFactory.DTOResponsive6();
+            FlightReservationDTO expected = DTOResponseFlightFactory.DTOResponsive6();
 
             // Request
             MockHttpServletRequestBuilder request = MockMvcRequestBuilders.post("/api/v1/flight-reservation")
