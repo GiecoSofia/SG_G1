@@ -26,9 +26,9 @@ public class HotelService implements ICrudService<HotelModelDTO, Integer> {
     ModelMapper mapper = new ModelMapper();
     @Override
     public MessageDTO saveEntity(HotelModelDTO hotelDTO) {
-        boolean exists = hotelRepository.existsByPlaceAndNameAndFromAndTo(hotelDTO.getName(), hotelDTO.getPlace(), hotelDTO.getFrom(), hotelDTO.getTo());
-        if (exists) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ya existe un hotel con características idénticas en las reservas.");
+        HotelModel existingHotel = hotelRepository.findByPlaceAndNameAndFromAndTo(hotelDTO.getPlace(), hotelDTO.getName(), hotelDTO.getFrom(), hotelDTO.getTo());
+        if (existingHotel != null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ya existe un hotel con características idénticas");
         }
         Long count = hotelRepository.countBookingsByHotelCode(hotelDTO.getCode());
         if (count > 0) {

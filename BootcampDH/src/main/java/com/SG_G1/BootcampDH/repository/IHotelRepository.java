@@ -10,8 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IHotelRepository extends JpaRepository<HotelModel,Integer> {
-
-    boolean existsByPlaceAndNameAndFromAndTo(String name, String place, LocalDate from, LocalDate to);
+    HotelModel findByPlaceAndNameAndFromAndTo(String name, String place, LocalDate from, LocalDate to);
 
       @Query("SELECT COUNT(b) FROM BookingModel b WHERE b.hotelCode = :hotelCode")
       Long countBookingsByHotelCode(@Param("hotelCode") String hotelCode);
