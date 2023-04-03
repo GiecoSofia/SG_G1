@@ -1,6 +1,5 @@
 package com.SG_G1.BootcampDH.dto;
 
-import com.SG_G1.BootcampDH.model.PeopleModel;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,6 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.CascadeType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.time.LocalDate;
@@ -31,6 +33,6 @@ public class BookingModelDTO {
     private int peopleAmount;
     private String roomType;
     private List<@Valid PeopleModelDTO> people;
-
+    private PaymentMethodDTO paymentMethodDTO;
 
 }
