@@ -29,11 +29,11 @@ public class HotelService  {
     public MessageDTO saveEntity(HotelModelDTO hotelDTO) {
         HotelModel existingHotel = hotelRepository.findByPlaceAndNameAndFromAndTo(hotelDTO.getPlace(), hotelDTO.getName(), hotelDTO.getFrom(), hotelDTO.getTo());
         if (existingHotel != null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ya existe un hotel con características idénticas");
+            throw new ValidationParams("Ya existe un hotel con características idénticas");
         }
         Long count = hotelRepository.countBookingsByHotelCode(hotelDTO.getCode());
         if (count > 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El hotel está actualmente en una reserva.");
+            throw new ValidationParams( "El hotel está actualmente en una reserva.");
         }
         HotelModel hotel = mapper.map(hotelDTO, HotelModel.class);
         hotelRepository.save(hotel);
