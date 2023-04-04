@@ -28,5 +28,10 @@ public interface IFlightRepository extends JpaRepository<FlightModel,Integer> {
     List<FlightModel> findByFromEqualsAndToEqualsAndDestinationEqualsAndOriginEquals(LocalDate from, LocalDate to, String destination, String origin);
 
 
+    //PRACTICA INDIVIDUAL
+    List<FlightModel> findByDestinationEquals(String destination);
+
+    List<FlightModel> findBySeatTypeEquals(String seatType);
+
 
 }

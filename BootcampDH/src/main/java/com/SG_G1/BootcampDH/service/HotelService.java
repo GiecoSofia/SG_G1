@@ -41,25 +41,17 @@ public class HotelService  {
                 .message("El hotel se dio de alta correctamente.")
                 .build();
     }
-    /* el metodo countBookingsByHotelCode Busca todas las reservas que tengan el mismo código de hotel que se pasa como parámetro y
-    devuelve el número de resultados. Si el número de reservas es mayor que cero, entonces el hotel está actualmente
-    en una reserva y no debe dar de alta el hotel*/
-
-
 
 
     public MessageDTO updateEntity(String hotelCode, HotelModelDTO DTO) {
         HotelModel hotel = hotelRepository.findByCode(hotelCode)
                 .orElseThrow(() -> new ValidationParams("El hotel con el código " + hotelCode + " no existe"));
 
-
-
         mapper.map(DTO, hotel);
         hotelRepository.save(hotel);
 
         return new MessageDTO("Hotel modificado correctamente");
     }
-
 
 
     public List<HotelModelDTO> getAllEntities() {
@@ -101,7 +93,30 @@ public class HotelService  {
             throw new ValidationParams("No se pudo encontrar un hotel con ese codigo");
         }
     }
+
+
+    //PRACTICA INDIVIDUAL
+    public List<HotelModelDTO> findPlace(String place) {
+        List<HotelModel> hotelByCity = hotelRepository.findByPlaceEquals(place);
+        if (hotelByCity.isEmpty()) {
+            throw new ValidationParams("No hay hoteles en el destino indicado");
+        }
+        return hotelByCity.stream()
+                .map(hotel -> mapper.map(hotel, HotelModelDTO.class))
+                .collect(Collectors.toList());
     }
+
+
+    public List<HotelModelDTO> findByRoomType(String type) {
+        List<HotelModel> hotelByRoomType = hotelRepository.findByTypeEquals(type);
+        if(hotelByRoomType.isEmpty()) {
+            throw new ValidationParams("No existe ese tipo de habitacion");
+        }
+        return hotelByRoomType.stream()
+                .map(hotel -> mapper.map(hotel, HotelModelDTO.class))
+                .collect(Collectors.toList());
+    }
+}
 
 
 

@@ -44,7 +44,6 @@ public class FlightService {
         return MessageDTO.builder()
                 .message("El vuelo se dio de alta correctamente.")
                 .build();
-
     }
 
 
@@ -54,17 +53,8 @@ public class FlightService {
         FlightModel flight = flightsRepository.findByCode(flightNumber)
                 .orElseThrow(() -> new ValidationParams("El vuelo con el código " + flightNumber + " no existe"));
 
-
-
-
-
-
-
         mapper.map(DTO, flight);
         flightsRepository.save(flight);
-
-
-
         return new MessageDTO("Vuelo modificado correctamente");
     }
 
@@ -110,5 +100,28 @@ public class FlightService {
         }
 
     }
+
+
+    //PRACTICA INDIVIDUAL
+    public List<FlightModelDTO> findDestination(String destination) {
+        List<FlightModel> flightByCity = flightsRepository.findByDestinationEquals(destination);
+        if (flightByCity.isEmpty()) {
+            throw new ValidationParams("No hay vuelos disponibles para el destino indicado");
+        }
+        return flightByCity.stream()
+                .map(flight -> mapper.map(flight, FlightModelDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    public List<FlightModelDTO> findBySeatType(String seatType) {
+        List<FlightModel> flightBySeatType = flightsRepository.findBySeatTypeEquals(seatType);
+//        if (flightBySeatType.isEmpty()) {
+//            throw new ValidationParams("No hay vuelos disponibles para el destino indicado");
+//        }
+        return flightBySeatType.stream()
+                .map(flight -> mapper.map(flight, FlightModelDTO.class))
+                .collect(Collectors.toList());
+    }
+
 }
 

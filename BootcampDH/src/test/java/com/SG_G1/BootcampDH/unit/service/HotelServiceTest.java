@@ -1,15 +1,10 @@
 package com.SG_G1.BootcampDH.unit.service;
-/*
-import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive3;
-import com.SG_G1.BootcampDH.dto.responsive.DTOresponsive6;
-import com.SG_G1.BootcampDH.dto.resquest.DTOrequest6;
-import com.SG_G1.BootcampDH.dto.resquest.DTOresquest3;
+import com.SG_G1.BootcampDH.dto.HotelModelDTO;
+import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
 import com.SG_G1.BootcampDH.exception.ValidationParams;
-import com.SG_G1.BootcampDH.model.HotelModel;
-import com.SG_G1.BootcampDH.repository.HotelRepository;
+import com.SG_G1.BootcampDH.repository.IHotelRepository;
 import com.SG_G1.BootcampDH.service.HotelService;
 import com.SG_G1.BootcampDH.utils.*;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,105 +12,71 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;*/
 
-/*@ExtendWith(MockitoExtension.class)
+@ExtendWith(MockitoExtension.class)
 public class HotelServiceTest {
     @Mock
-    HotelRepository hotelRepository;
+    IHotelRepository hotelRepository;
 
     @InjectMocks
-    HotelService hotelService;*/
+    HotelService hotelService;
 
 
-
-   /* @Test
-    @DisplayName("Testea que hay hoteles registrados")
-    public void hotelRepositoryListTest(){
+    @Test
+    public void saveEntityTest() {
         //arrange
-        List<HotelModel> expected = HotelFactory.hotelList();
-        //act
-        Mockito.lenient().when(hotelRepository.getHotels()).thenReturn(HotelFactory.hotelList());
-        var result = hotelService.hotelRepositoryList();
-        //assert
-        Assertions.assertEquals(expected, result);
-    }*/
-
-
-   /* @Test
-    @DisplayName("Testeamos que nos traiga los hoteles disponibles en un rango de fechas y destino")
-    public void findDateTest(){
-        //Arrange
-        LocalDate dateFrom = LocalDate.parse("2022-02-10");
-        LocalDate dateTo = LocalDate.parse("2023-03-20");
-        String place ="Puerto Iguazú" ;
-
-        List<HotelModel> expected = new ArrayList<>();
-        HotelModel hotel = HotelFactory.hotel1();
-        expected.add(hotel);
-
-        //Act
-        Mockito.lenient().when(hotelRepository.getHotels()).thenReturn(HotelFactory.hotelList());
-        var result = hotelService.hotelRepositoryListDisp(dateFrom,dateTo,place);
-
-
-        //Assert
-        Assertions.assertEquals(expected, result);
-
-    }*/
-
-    /*@Test
-    @DisplayName("Testea que trae la excepción cuando los parametros no coinciden")
-    public void hotelRepositoryListWithEmptyTest(){
-        //arrange
-        LocalDate dateFrom = LocalDate.parse("2024-02-10");
-        LocalDate dateTo = LocalDate.parse("2023-03-20");
-        String place ="Catamarca" ;
-
+        HotelModelDTO hotel = HotelFactory.hotel13();
+        MessageDTO expected = MessageDTO.builder()
+                .message("El hotel se dio de alta correctamente.")
+                .build();
 
         //act
-        Mockito.lenient().when(hotelRepository.getHotels()).thenReturn(HotelFactory.hotelList());
+        Mockito.lenient().when(hotelRepository.findByPlaceAndNameAndFromAndTo(hotel.getName(), hotel.getPlace(), hotel.getTo(), hotel.getFrom())).thenReturn(null);
+        Mockito.lenient().when(hotelRepository.countBookingsByHotelCode(hotel.getCode())).thenReturn(new Long(0));
+
+        var result = hotelService.saveEntity(hotel);
 
         //assert
-        Assertions.assertThrows(ValidationParams.class,() -> hotelService.hotelRepositoryListDisp(dateFrom,dateTo,place));
-    }*/
+        assertEquals(expected, result);
+    }
 
-  /*  @Test
-    @DisplayName("Testeamos cuando se da de alta la nueva reserva")
-    public void hotelReservationTest() {
+    @Test
+    public void findPlaceTest() {
         //arrange
-        DTOresquest3 params = DTORequestHotelFactory.DTORequest3();
-        DTOresponsive3 expected = DTOResponseHotelFactory.DTOResponsive3();
+        String place = "Cartagena";
+        HotelModelDTO hotel13 = HotelFactory.hotel13();
+        HotelModelDTO hotel14 = HotelFactory.hotel14();
+        List<HotelModelDTO> hotelList = Arrays.asList(hotel13, hotel14);
 
         //act
-        Mockito.lenient().when(hotelRepository.getHotels()).thenReturn(HotelFactory.hotelList());
-        var result = hotelService.booking(params);
-
+        Mockito.lenient().when(hotelRepository.findByPlaceEquals(place)).thenReturn(Collections.emptyList());
 
         //assert
-        Assertions.assertEquals(expected, result);
+        try {
+            hotelService.findPlace(place);
+        } catch (ValidationParams ex) {
+            assertEquals("No hay hoteles en el destino indicado", ex.getMessage());
+        }
+    }
 
-    }*/
+    @Test
+    public void findByRoomTypeTest() {
+        String roomType = "Doble";
+        HotelModelDTO hotel13 = HotelFactory.hotel13();
+        HotelModelDTO hotel14 = HotelFactory.hotel14();
+        List<HotelModelDTO> hotelList = Arrays.asList(hotel13, hotel14);
 
-   /* @Test
-    @DisplayName("Testeamos cuando la reserva no se puede concretar")
-    public void flightNullReservationTest () {
-            //arrange
-            DTOresquest3 params = DTORequestHotelFactory.DTORequest3();
-            params.getBooking().setDateFrom(LocalDate.parse("2025-02-10"));
+        Mockito.lenient().when(hotelRepository.findByTypeEquals(roomType)).thenReturn(Collections.emptyList());
 
-            //act
-            Mockito.lenient().when(hotelRepository.getHotels()).thenReturn(HotelFactory.hotelList());
-
-            //assert
-            Assertions.assertThrows(ValidationParams.class, () -> hotelService.booking(params));
-        }*/
-
-/*    }*/
-
-
-
-
+        try {
+            hotelService.findByRoomType(roomType);
+        } catch (ValidationParams ex) {
+            assertEquals("No existe ese tipo de habitacion", ex.getMessage());
+        }
+    }
+}

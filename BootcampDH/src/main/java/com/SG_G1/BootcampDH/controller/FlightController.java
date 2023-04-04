@@ -1,6 +1,7 @@
 package com.SG_G1.BootcampDH.controller;
 
 import com.SG_G1.BootcampDH.dto.FlightModelDTO;
+import com.SG_G1.BootcampDH.dto.HotelModelDTO;
 import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
 import com.SG_G1.BootcampDH.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,15 @@ public class FlightController {
     }
 
 
+    //PRACTICA INDIVIDUAL
+    @GetMapping("/city")
+    public List<FlightModelDTO> getFlightByCity(@RequestParam("city") String destination) {
+        return flightService.findDestination(destination);
+    }
 
-
+    @GetMapping("/type")
+    public List<FlightModelDTO> getFlightBySeatType(@RequestParam("seatType") String seatType) {
+        return flightService.findBySeatType(seatType);
+    }
 
 }

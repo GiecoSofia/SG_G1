@@ -59,6 +59,19 @@ public class HotelController {
         return ResponseEntity.ok(message);
     }
 
+
+    //PRACTICA INDIVIDUAL
+    @GetMapping("/city")
+    public List<HotelModelDTO> getHotelByCity(@RequestParam("city") String place) {
+        return hotelService.findPlace(place);
+    }
+
+
+    @GetMapping("/type")
+    public List<HotelModelDTO> getHotelByRoomType(@RequestParam("type") String type) {
+        return hotelService.findByRoomType(type);
+    }
+
 }
 
 
