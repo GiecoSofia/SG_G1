@@ -1,16 +1,10 @@
 package com.SG_G1.BootcampDH.service;
 
-import com.SG_G1.BootcampDH.dto.BookingModelDTO;
 import com.SG_G1.BootcampDH.dto.FlightReservationModelDTO;
 import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
 import com.SG_G1.BootcampDH.exception.ValidationParams;
-import com.SG_G1.BootcampDH.model.BookingModel;
-import com.SG_G1.BootcampDH.model.FlightModel;
 import com.SG_G1.BootcampDH.model.FlightReservationModel;
 import com.SG_G1.BootcampDH.repository.IFlightReservationRepository;
-import com.SG_G1.BootcampDH.repository.IHotelBookingRepository;
-import com.SG_G1.BootcampDH.repository.IHotelRepository;
-import com.SG_G1.BootcampDH.service.generics.ICrudService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

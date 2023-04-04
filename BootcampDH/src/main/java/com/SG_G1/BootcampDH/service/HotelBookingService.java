@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -71,5 +72,11 @@ public class HotelBookingService {
                 .orElseThrow(() -> new ValidationParams("La reserva con el id " + id + " no existe"));
         bookingRepository.delete(booking);
         return new MessageDTO("La reserva se eliminó correctamente.");
+    }
+
+    public List<BookingModelDTO> getEntityById(Integer id) {
+        BookingModel booking = bookingRepository.findById(id)
+                .orElseThrow(() -> new ValidationParams("La reserva con el ID " + id + " no existe"));
+        return Collections.singletonList(mapper.map(booking, BookingModelDTO.class));
     }
 }

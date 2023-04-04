@@ -34,4 +34,7 @@ public class BookingModelDTO {
     private String roomType;
     private List<@Valid PeopleModelDTO> people;
     private PaymentMethodDTO paymentMethod;
+
+    public BookingModelDTO(BookingModelDTO reservation) {
+    }
 }

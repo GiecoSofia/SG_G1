@@ -1,5 +1,6 @@
 package com.SG_G1.BootcampDH.controller;
 
+import com.SG_G1.BootcampDH.dto.BookingModelDTO;
 import com.SG_G1.BootcampDH.dto.responsive.HotelReservationDTO;
 import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
 import com.SG_G1.BootcampDH.dto.resquest.HotelRequestDTO;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/hotel-booking")
@@ -37,6 +40,14 @@ public class HotelBookingController {
     @DeleteMapping("/delete/")
     public ResponseEntity<MessageDTO> deleteBooking(@RequestParam Integer id) {
         return ResponseEntity.ok(bookingService.deleteEntity(id));
+    }
+
+
+    //requerimiento individual n° 5 para consultar la reserva por el id,
+    @GetMapping("/idReservation")
+    public ResponseEntity<HotelReservationDTO> getBookingById(@RequestParam("id") Integer id) {
+        List<BookingModelDTO> bookingList = bookingService.getEntityById(id);
+        return new ResponseEntity<>(new HotelReservationDTO(bookingList), HttpStatus.OK);
     }
 
 }

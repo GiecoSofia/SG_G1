@@ -5,12 +5,9 @@ import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
 import com.SG_G1.BootcampDH.exception.ValidationParams;
 import com.SG_G1.BootcampDH.model.HotelModel;
 import com.SG_G1.BootcampDH.repository.IHotelRepository;
-import com.SG_G1.BootcampDH.service.generics.ICrudService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -51,8 +48,6 @@ public class HotelService  {
     public MessageDTO updateEntity(String hotelCode, HotelModelDTO DTO) {
         HotelModel hotel = hotelRepository.findByCode(hotelCode)
                 .orElseThrow(() -> new ValidationParams("El hotel con el código " + hotelCode + " no existe"));
-
-
 
         mapper.map(DTO, hotel);
         hotelRepository.save(hotel);
@@ -101,7 +96,16 @@ public class HotelService  {
             throw new ValidationParams("No se pudo encontrar un hotel con ese codigo");
         }
     }
+
+    //requerimiento n° 5  individual para consultar un hotel por codigo,
+    public HotelModelDTO getEntityByCode(String hotelCode) {
+        HotelModel hotel = hotelRepository.findByCode(hotelCode)
+                .orElseThrow(() -> new ValidationParams("El hotel con el código " + hotelCode + " no existe"));
+        return mapper.map(hotel, HotelModelDTO.class);
     }
+
+    }
+
 
 
 

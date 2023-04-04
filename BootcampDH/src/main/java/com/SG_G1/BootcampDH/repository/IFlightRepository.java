@@ -25,6 +25,9 @@ public interface IFlightRepository extends JpaRepository<FlightModel,Integer> {
     boolean existsByCode(String code);
     Optional<FlightModel> findByCode(String code);
 
+ @Query("SELECT f FROM FlightModel f WHERE f.code = :code")
+ List<FlightModel> findAllByCode(@Param("code") String code);
+
     List<FlightModel> findByFromEqualsAndToEqualsAndDestinationEqualsAndOriginEquals(LocalDate from, LocalDate to, String destination, String origin);
 
 

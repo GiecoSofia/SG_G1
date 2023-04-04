@@ -1,20 +1,13 @@
 package com.SG_G1.BootcampDH.service;
 
 import com.SG_G1.BootcampDH.dto.FlightModelDTO;
-import com.SG_G1.BootcampDH.dto.HotelModelDTO;
 import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
 import com.SG_G1.BootcampDH.exception.ValidationParams;
 import com.SG_G1.BootcampDH.model.FlightModel;
-import com.SG_G1.BootcampDH.model.HotelModel;
 import com.SG_G1.BootcampDH.repository.IFlightRepository;
-import com.SG_G1.BootcampDH.repository.IHotelRepository;
-import com.SG_G1.BootcampDH.service.generics.ICrudService;
-import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -44,7 +37,6 @@ public class FlightService {
         return MessageDTO.builder()
                 .message("El vuelo se dio de alta correctamente.")
                 .build();
-
     }
 
 
@@ -53,17 +45,8 @@ public class FlightService {
 
         FlightModel flight = flightsRepository.findByCode(flightNumber)
                 .orElseThrow(() -> new ValidationParams("El vuelo con el código " + flightNumber + " no existe"));
-
-
-
-
-
-
-
         mapper.map(DTO, flight);
         flightsRepository.save(flight);
-
-
 
         return new MessageDTO("Vuelo modificado correctamente");
     }
@@ -99,16 +82,23 @@ public class FlightService {
             throw new ValidationParams("No se puede eliminar el vuelo porque se encuentra en reserva");
         }
 
-        if(flightsRepository.existsByCode(flightNumber)) {
+        if (flightsRepository.existsByCode(flightNumber)) {
             flightsRepository.deleteByCode(flightNumber);
             return MessageDTO.builder()
                     .message("Se elimino el vuelo con Number " + flightNumber)
                     .build();
-        }
-        else{
+        } else {
             throw new ValidationParams("No se pudo encontrar un vuelo con ese codigo");
         }
 
+    }
+
+    public List<FlightModelDTO> getEntitiesByCode(String flightNumber) {
+        List<FlightModel> flights = flightsRepository.findAllByCode(flightNumber);
+        if (flights.isEmpty()) {
+            throw new ValidationParams("No se encontraron vuelos con el código " + flightNumber);
+        }
+        return flights.stream().map(flight -> mapper.map(flight, FlightModelDTO.class)).collect(Collectors.toList());
     }
 }
 

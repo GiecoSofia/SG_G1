@@ -3,6 +3,8 @@ package com.SG_G1.BootcampDH.controller;
 
 import com.SG_G1.BootcampDH.dto.HotelModelDTO;
 import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
+import com.SG_G1.BootcampDH.exception.ValidationParams;
+import com.SG_G1.BootcampDH.model.HotelModel;
 import com.SG_G1.BootcampDH.service.HotelBookingService;
 import com.SG_G1.BootcampDH.service.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +61,18 @@ public class HotelController {
         return ResponseEntity.ok(message);
     }
 
+
+    ////requerimiento individual n° 5 para consultar un hotel por codigo,
+    @GetMapping("/code")
+    public ResponseEntity<HotelModelDTO> getHotelByCode(@RequestParam("hotelCode") String hotelCode) {
+        HotelModelDTO hotel = hotelService.getEntityByCode(hotelCode);
+        return ResponseEntity.ok(hotel);
+    }
+
+
 }
+
+
 
 
 
