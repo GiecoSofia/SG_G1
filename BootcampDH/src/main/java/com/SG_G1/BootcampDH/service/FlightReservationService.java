@@ -53,7 +53,7 @@ public class FlightReservationService{
 
 
         FlightReservationModel reservation = flightReservationRepository.findById(id)
-                .orElseThrow(() -> new ValidationParams("La reserva con el " + id + "no existe"));
+                .orElseThrow(() -> new ValidationParams("La reserva con el " + id + " no existe"));
         
 
         mapper.map(DTO, reservation);

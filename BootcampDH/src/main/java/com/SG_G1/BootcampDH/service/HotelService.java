@@ -64,6 +64,10 @@ public class HotelService  {
 
     public List<HotelModelDTO> getAllEntities() {
         var list = hotelRepository.findAll();
+
+        if (list.isEmpty()) {
+            throw new ValidationParams("No hay hoteles cargados");
+        }
         return list.stream().map(
                         hotel -> mapper.map(hotel, HotelModelDTO.class)
                 )
@@ -84,7 +88,7 @@ public class HotelService  {
     @Transactional
     public MessageDTO deleteEntity(String hotelCode) {
         if (hotelRepository.countBookingsByHotelCode(hotelCode) > 0) {
-            return new MessageDTO("No se puede eliminar el hotel porque se encuentra en reserva");
+            throw new ValidationParams("No se puede eliminar el hotel porque se encuentra en reserva");
         }
 
         if(hotelRepository.existsByCode(hotelCode)) {

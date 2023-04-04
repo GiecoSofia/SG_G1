@@ -72,6 +72,10 @@ public class FlightService {
     public List<FlightModelDTO> getAllEntities() {
 
         var list = flightsRepository.findAll();
+
+        if (list.isEmpty()) {
+            throw new ValidationParams("No hay vuelos cargados");
+        }
         return list.stream().map(
                         flight -> mapper.map(flight, FlightModelDTO.class)
                 )
@@ -92,7 +96,7 @@ public class FlightService {
     public MessageDTO deleteEntity(String flightNumber) {
 
         if (flightsRepository.countFlightsReservationByHotelCode(flightNumber) > 0) {
-            return new MessageDTO("No se puede eliminar el vuelo porque se encuentra en reserva");
+            throw new ValidationParams("No se puede eliminar el vuelo porque se encuentra en reserva");
         }
 
         if(flightsRepository.existsByCode(flightNumber)) {
