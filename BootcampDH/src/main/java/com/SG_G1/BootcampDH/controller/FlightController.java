@@ -54,8 +54,18 @@ public class FlightController {
         return ResponseEntity.ok(message);
     }
 
+    @GetMapping("/price")
+    public List<FlightModelDTO> getFlightByPrice (@RequestParam("desde") Double desde,
+                                                  @RequestParam("hasta")Double hasta){
+        return flightService.findByPrice(desde, hasta);
 
+    }
 
+    @GetMapping("/seat")
+    public List<FlightModelDTO> getFlightBySeat (@RequestParam("seatType") String seatType){
+        return flightService.findBySeat(seatType);
+
+    }
 
 
 }

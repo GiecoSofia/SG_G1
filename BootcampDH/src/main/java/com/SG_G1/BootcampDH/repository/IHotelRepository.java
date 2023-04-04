@@ -1,5 +1,6 @@
 package com.SG_G1.BootcampDH.repository;
 
+import com.SG_G1.BootcampDH.model.FlightModel;
 import com.SG_G1.BootcampDH.model.HotelModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -25,6 +26,11 @@ public interface IHotelRepository extends JpaRepository<HotelModel,Integer> {
     Optional<HotelModel> findByCode(String code);
 
     List<HotelModel> findByFromEqualsAndToEqualsAndPlaceEquals(LocalDate from, LocalDate to, String place);
+
+    List<HotelModel> findByPriceBetween (Double desde, Double hasta);
+
+    List<HotelModel> findByTypeEquals(String Type);
+
 
 }
 

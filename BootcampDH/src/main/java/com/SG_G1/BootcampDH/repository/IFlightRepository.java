@@ -27,6 +27,9 @@ public interface IFlightRepository extends JpaRepository<FlightModel,Integer> {
 
     List<FlightModel> findByFromEqualsAndToEqualsAndDestinationEqualsAndOriginEquals(LocalDate from, LocalDate to, String destination, String origin);
 
+    List<FlightModel> findByPriceBetween (Double desde, Double hasta);
+
+    List<FlightModel> findBySeatTypeEquals(String seatType);
 
 
 }

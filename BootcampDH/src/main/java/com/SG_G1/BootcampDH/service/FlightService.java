@@ -110,5 +110,33 @@ public class FlightService {
         }
 
     }
+
+    public List<FlightModelDTO> findByPrice (Double desde, Double hasta){
+        if (desde == null) {
+            desde = Double.MIN_VALUE;
+        }
+        if (hasta == null) {
+            hasta = Double.MAX_VALUE;
+        }
+
+        var list =flightsRepository.findByPriceBetween(desde, hasta);
+
+        if (list.isEmpty()){
+            throw new ValidationParams("No se encuentran vuelos disponibles para el rango de precio mencionado");
+        }
+        return list.stream().map(
+                flights -> mapper.map(flights, FlightModelDTO.class)
+        ).collect(Collectors.toList());
+
+    }
+
+    public List<FlightModelDTO> findBySeat (String seatType){
+        var list = flightsRepository.findBySeatTypeEquals(seatType);
+
+        return list.stream().map(
+                flights -> mapper.map(flights, FlightModelDTO.class)
+        ).collect(Collectors.toList());
+    }
+
 }
 

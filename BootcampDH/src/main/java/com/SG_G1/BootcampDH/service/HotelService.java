@@ -1,5 +1,6 @@
 package com.SG_G1.BootcampDH.service;
 
+import com.SG_G1.BootcampDH.dto.FlightModelDTO;
 import com.SG_G1.BootcampDH.dto.HotelModelDTO;
 import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
 import com.SG_G1.BootcampDH.exception.ValidationParams;
@@ -101,7 +102,34 @@ public class HotelService  {
             throw new ValidationParams("No se pudo encontrar un hotel con ese codigo");
         }
     }
+
+    public List<HotelModelDTO> findByPrice (Double desde, Double hasta){
+        if (desde == null) {
+            desde = Double.MIN_VALUE;
+        }
+        if (hasta == null) {
+            hasta = Double.MAX_VALUE;
+        }
+
+        var list = hotelRepository.findByPriceBetween(desde, hasta);
+
+        if (list.isEmpty()){
+            throw new ValidationParams("No se encuentran hoteles disponibles para el rango de precio mencionado");
+        }
+        return list.stream().map(
+                hotels -> mapper.map(hotels, HotelModelDTO.class)
+        ).collect(Collectors.toList());
+
     }
+
+    public List<HotelModelDTO> findByType (String Type){
+        var list = hotelRepository.findByTypeEquals(Type);
+
+        return list.stream().map(
+                hotels -> mapper.map(hotels, HotelModelDTO.class)
+        ).collect(Collectors.toList());
+    }
+}
 
 
 

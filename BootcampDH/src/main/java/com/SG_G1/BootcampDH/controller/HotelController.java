@@ -1,6 +1,7 @@
 package com.SG_G1.BootcampDH.controller;
 
 
+import com.SG_G1.BootcampDH.dto.FlightModelDTO;
 import com.SG_G1.BootcampDH.dto.HotelModelDTO;
 import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
 import com.SG_G1.BootcampDH.service.HotelBookingService;
@@ -57,6 +58,19 @@ public class HotelController {
     public ResponseEntity<MessageDTO> deleteHotelByCode(@RequestParam("hotelCode") String code) {
         MessageDTO message = hotelService.deleteEntity(code);
         return ResponseEntity.ok(message);
+    }
+
+    @GetMapping("/price")
+    public List<HotelModelDTO> getHotelByPrice (@RequestParam("desde") Double desde,
+                                                  @RequestParam("hasta")Double hasta){
+        return hotelService.findByPrice(desde, hasta);
+
+    }
+
+    @GetMapping("/type")
+    public List<HotelModelDTO> getHoteltByType (@RequestParam("Type") String Type){
+        return hotelService.findByType(Type);
+
     }
 
 }
