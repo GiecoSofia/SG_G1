@@ -12,7 +12,7 @@ import java.time.LocalDate;
 @Setter
 @Builder
 @Entity
-@Table(name= "hotel")
+@Table(name = "hotel")
 public class HotelModel {
 
     @Id
@@ -34,14 +34,14 @@ public class HotelModel {
     @Column(name = "price", precision = 2)
     private Double price;
 
-    @Column(name= "date_from")
+    @Column(name = "date_from")
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate from;
 
-    @Column(name= "date_to")
+    @Column(name = "date_to")
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate to;
 
-    @Column(name= "booking")
+    @Column(name = "booking")
     private Boolean booking;
 }
