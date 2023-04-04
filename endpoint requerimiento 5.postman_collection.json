@@ -1,0 +1,34 @@
+{
+	"info": {
+		"_postman_id": "c4dc076a-a2e1-4c96-9f95-b7d22fea028d",
+		"name": "endpoint requerimiento 5",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24047357"
+	},
+	"item": [
+		{
+			"name": "buscarHotelPorCodigo",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "buscarVueloPorCodigo",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "BucarReservaPorId",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
