@@ -43,7 +43,8 @@ public class HotelServiceTest {
 
 
 
-    //Testeo de service requerimiento individual
+    //Test de service requerimiento individual//
+    // ---------------------------------------------//
     @Test
     public void testGetAllEntities() {
         //arrange
