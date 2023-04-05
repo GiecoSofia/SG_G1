@@ -23,6 +23,7 @@ public class HotelController {
     HotelService hotelService;
     @Autowired
     HotelBookingService bookingService;
+    
 
 
     @PostMapping("/new/")
@@ -58,6 +59,8 @@ public class HotelController {
         MessageDTO message = hotelService.deleteEntity(code);
         return ResponseEntity.ok(message);
     }
+
+
 
 }
 

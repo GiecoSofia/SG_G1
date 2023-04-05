@@ -26,5 +26,6 @@ public interface IHotelRepository extends JpaRepository<HotelModel,Integer> {
 
     List<HotelModel> findByFromEqualsAndToEqualsAndPlaceEquals(LocalDate from, LocalDate to, String place);
 
+
 }
 

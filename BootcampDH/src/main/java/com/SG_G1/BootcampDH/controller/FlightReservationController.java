@@ -41,4 +41,5 @@ public class FlightReservationController {
     public ResponseEntity<MessageDTO> deleteBooking(@RequestParam Integer id) {
         return ResponseEntity.ok(flightService.deleteEntity(id));
     }
+
 }

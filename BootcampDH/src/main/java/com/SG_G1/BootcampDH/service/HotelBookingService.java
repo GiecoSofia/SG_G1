@@ -4,6 +4,7 @@ import com.SG_G1.BootcampDH.dto.BookingModelDTO;
 import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
 import com.SG_G1.BootcampDH.exception.ValidationParams;
 import com.SG_G1.BootcampDH.model.BookingModel;
+import com.SG_G1.BootcampDH.model.HotelModel;
 import com.SG_G1.BootcampDH.repository.IHotelBookingRepository;
 import com.SG_G1.BootcampDH.repository.IHotelRepository;
 import org.modelmapper.ModelMapper;
@@ -14,6 +15,8 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 @Service
 public class HotelBookingService {
@@ -71,5 +74,26 @@ public class HotelBookingService {
                 .orElseThrow(() -> new ValidationParams("La reserva con el id " + id + " no existe"));
         bookingRepository.delete(booking);
         return new MessageDTO("La reserva se eliminó correctamente.");
+    }
+
+    public Double sumPrices() {
+        List <BookingModel> list = bookingRepository.findAll();
+        double total = 0;
+        for(BookingModel booking : list) {
+            Long dias = DAYS.between(booking.getDateFrom(), booking.getDateTo());
+            double price = findPriceByCode(booking.getHotelCode());
+            total += sumPrices(dias, price );
+        }
+        return total;
+    }
+
+    private Double sumPrices (Long days, double price){
+        return days * price;
+    }
+
+    private Double findPriceByCode (String code){
+        HotelModel hotel = hotelRepository.findByCode(code)
+                .orElseThrow(() -> new ValidationParams("El hotel con el código " + code + " no existe"));
+        return hotel.getPrice();
     }
 }

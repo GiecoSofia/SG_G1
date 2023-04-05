@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/v1/hotel-booking")
 public class HotelBookingController {
@@ -37,6 +39,12 @@ public class HotelBookingController {
     @DeleteMapping("/delete/")
     public ResponseEntity<MessageDTO> deleteBooking(@RequestParam Integer id) {
         return ResponseEntity.ok(bookingService.deleteEntity(id));
+    }
+
+    @GetMapping("/sumPrices")
+    public ResponseEntity<Double> sumPrices() {
+        Double totalPrice = bookingService.sumPrices();
+        return ResponseEntity.ok(totalPrice);
     }
 
 }
