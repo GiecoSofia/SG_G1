@@ -1,5 +1,7 @@
 package com.SG_G1.BootcampDH.controller;
 
+import com.SG_G1.BootcampDH.dto.BookingModelDTO;
+import com.SG_G1.BootcampDH.dto.FlightReservationModelDTO;
 import com.SG_G1.BootcampDH.dto.responsive.HotelReservationDTO;
 import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
 import com.SG_G1.BootcampDH.dto.resquest.HotelRequestDTO;
@@ -39,4 +41,16 @@ public class HotelBookingController {
         return ResponseEntity.ok(bookingService.deleteEntity(id));
     }
 
+    @PostMapping("/findByPeopleDni")
+    public ResponseEntity<BookingModelDTO> findByPeopleDni(@RequestParam("dni") Integer dni){
+        return ResponseEntity.ok(bookingService.findByPeopleDni(dni));
+    }
+
+    @PostMapping("/findByPeopleMail")
+    public ResponseEntity<BookingModelDTO> findByPeopleMail(@RequestParam("mail") String mail){
+        return ResponseEntity.ok(bookingService.findByPeopleMail(mail));
+    }
 }
+
+
+

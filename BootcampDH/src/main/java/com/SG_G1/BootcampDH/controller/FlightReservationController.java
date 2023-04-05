@@ -1,6 +1,7 @@
 package com.SG_G1.BootcampDH.controller;
 
 
+import com.SG_G1.BootcampDH.dto.FlightReservationModelDTO;
 import com.SG_G1.BootcampDH.dto.responsive.FlightReservationDTO;
 import com.SG_G1.BootcampDH.dto.responsive.MessageDTO;
 import com.SG_G1.BootcampDH.dto.resquest.FlightRequestDTO;
@@ -40,5 +41,15 @@ public class FlightReservationController {
     @DeleteMapping("/delete/")
     public ResponseEntity<MessageDTO> deleteBooking(@RequestParam Integer id) {
         return ResponseEntity.ok(flightService.deleteEntity(id));
+    }
+
+    @PostMapping("/findByPeopleDni")
+    public ResponseEntity<FlightReservationModelDTO> findByPeopleDni(@RequestParam("dni") Integer dni){
+        return ResponseEntity.ok(flightService.findByPeopleDni(dni));
+    }
+
+    @PostMapping("/findByPeopleMail")
+    public ResponseEntity<FlightReservationModelDTO> findByPeopleMail(@RequestParam("mail") String mail){
+        return ResponseEntity.ok(flightService.findByPeopleMail(mail));
     }
 }

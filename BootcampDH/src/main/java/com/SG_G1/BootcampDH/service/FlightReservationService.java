@@ -83,4 +83,26 @@ public class FlightReservationService{
         flightReservationRepository.delete(reservation);
         return new MessageDTO("La reserva se eliminó correctamente.");
     }
+
+    public FlightReservationModelDTO findByPeopleDni(Integer dni) {
+
+        try{
+            FlightReservationModelDTO booking = mapper.map(flightReservationRepository.findByPeopleDni(dni), FlightReservationModelDTO.class);
+            return booking;
+        }catch(IllegalArgumentException ex){
+            throw  new ValidationParams("La persona no se encuentra en niguna reserva");
+        }
+    }
+
+
+    public FlightReservationModelDTO findByPeopleMail(String  mail) {
+
+        try{
+            FlightReservationModelDTO booking = mapper.map(flightReservationRepository.findByPeopleMail(mail), FlightReservationModelDTO.class);
+
+            return booking;
+        }catch(IllegalArgumentException ex){
+            throw  new ValidationParams("La persona no se encuentra en niguna reserva");
+        }
+    }
 }

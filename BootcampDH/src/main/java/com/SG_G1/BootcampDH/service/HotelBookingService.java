@@ -72,4 +72,29 @@ public class HotelBookingService {
         bookingRepository.delete(booking);
         return new MessageDTO("La reserva se eliminó correctamente.");
     }
+
+    public BookingModelDTO findByPeopleDni(Integer dni) {
+
+        try{
+            BookingModelDTO booking = mapper.map(bookingRepository.findByPeopleDni(dni), BookingModelDTO.class);
+            return booking;
+        }catch(IllegalArgumentException ex){
+            throw  new ValidationParams("La persona no se encuentra en niguna reserva");
+        }
+
+    }
+
+
+    public BookingModelDTO findByPeopleMail(String  mail) {
+
+
+
+        try{
+            BookingModelDTO booking = mapper.map(bookingRepository.findByPeopleMail(mail), BookingModelDTO.class);
+            return booking;
+        }catch(IllegalArgumentException ex){
+            throw  new ValidationParams("La persona no se encuentra en niguna reserva");
+        }
+    }
+
 }
