@@ -1,0 +1,647 @@
+{
+	"info": {
+		"_postman_id": "c0eadac5-a509-45ee-ba87-273a677926b5",
+		"name": "S3_G1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26106561"
+	},
+	"item": [
+		{
+			"name": "PRACTICA INDIVIDUAL",
+			"item": [
+				{
+					"name": "GetHotelsByCity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/hotels/city?city=Tucumán",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"hotels",
+								"city"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "Tucumán"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetHotelsByRoomType",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/hotels/type?type=MULTIPLE",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"hotels",
+								"type"
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "MULTIPLE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetFlightsByCity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/flights/city?city=Puerto Iguazú",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"flights",
+								"city"
+							],
+							"query": [
+								{
+									"key": "city",
+									"value": "Puerto Iguazú"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetFlightsBySeatType",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/flights/type?seatType=BUSINESS",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"flights",
+								"type"
+							],
+							"query": [
+								{
+									"key": "seatType",
+									"value": "BUSINESS"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Hotels",
+			"item": [
+				{
+					"name": "createHotel",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\" : \"SH-0001\",\r\n    \"name\" : \"Buenos Aires Hotel\",\r\n    \"place\" : \"Buenos Aires\",\r\n    \"type\" : \"Doble\",\r\n    \"price\" : 2500.0,\r\n    \"from\": \"2022-04-12\",\r\n    \"to\" : \"2022-12-20\",\r\n    \"booking\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/hotels/new/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"hotels",
+								"new",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editHotel",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\" : \"SH-0001\",\r\n    \"name\" : \"Buenos Aires Hotel\",\r\n    \"place\" : \"Buenos Aires\",\r\n    \"type\" : \"Doble\",\r\n    \"price\" : 2500.0,\r\n    \"from\": \"2022-04-18\",\r\n    \"to\" : \"2022-12-20\",\r\n    \"booking\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/hotels/edit?hotelCode=code",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"hotels",
+								"edit"
+							],
+							"query": [
+								{
+									"key": "hotelCode",
+									"value": "code"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getHotels",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/hotels/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"hotels",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getHotelswithFilters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/hotels?dateFrom=dd/mm/aaaa&dateTo=dd/mm/aaaa&destination=destination_name",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"hotels"
+							],
+							"query": [
+								{
+									"key": "dateFrom",
+									"value": "dd/mm/aaaa"
+								},
+								{
+									"key": "dateTo",
+									"value": "dd/mm/aaaa"
+								},
+								{
+									"key": "destination",
+									"value": "destination_name"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteHotel",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/hotels/delete?hotelCode=code",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"hotels",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "hotelCode",
+									"value": "code"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Flights",
+			"item": [
+				{
+					"name": "createFlight",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\" : \"BAEC-1230\",\r\n    \"origin\" : \"Buenos Aires\",\r\n    \"destination\": \"El Calafate\",\r\n    \"seatType\": \"Simple\",\r\n    \"price\": 2333.0,\r\n    \"from\":\"2022-04-10\" ,\r\n    \"to\": \"2022-12-20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/flights/new",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"flights",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editFlight",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\" : \"BAEC-1230\",\r\n    \"origin\" : \"Buenos Aires\",\r\n    \"destination\": \"El Calafate\",\r\n    \"seatType\": \"Doble\",\r\n    \"price\": 2333.0,\r\n    \"from\":\"2022-04-10\" ,\r\n    \"to\": \"2022-12-20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/flights/edit?flightNumber=number",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"flights",
+								"edit"
+							],
+							"query": [
+								{
+									"key": "flightNumber",
+									"value": "number"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFlights",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/flights/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"flights",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFlightswithFilters",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/flights?dateFrom=10/02/2022&dateTo=15/02/2022&origin=Buenos Aires&destination=Puerto Iguazú",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"flights"
+							],
+							"query": [
+								{
+									"key": "dateFrom",
+									"value": "10/02/2022"
+								},
+								{
+									"key": "dateTo",
+									"value": "15/02/2022"
+								},
+								{
+									"key": "origin",
+									"value": "Buenos Aires"
+								},
+								{
+									"key": "destination",
+									"value": "Puerto Iguazú"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteFlights",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/flights/delete?flightNumber=number",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"flights",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "flightNumber",
+									"value": "number"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Bookings",
+			"item": [
+				{
+					"name": "createHotelBooking",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n  \"userName\" : \"arjonamiguel@gmail.com\",\r\n  \"booking\": {\r\n    \"dateFrom\" : \"17/04/2022\",\r\n    \"dateTo\": \"23/05/2022\",\r\n    \"destination\": \"Tucumán\",\r\n    \"hotelCode\" : \"SH-0055\",\r\n    \"peopleAmount\" : 2,\r\n    \"roomType\" : \"DOUBLE\",\r\n    \"people\" : [\r\n      {\r\n        \"dni\" : \"12345678\",\r\n        \"name\": \"Pablo\",\r\n        \"lastName\": \"Gomez\",\r\n        \"birthday\":\"10/11/1982\",\r\n        \"mail\": \"arjonamiguel@gmail.com\"\r\n      },\r\n      {\r\n        \"dni\" : \"12345578\",\r\n        \"name\": \"Pepito\",\r\n        \"lastName\": \"Gomez\",\r\n        \"birthday\":\"10/11/1982\",\r\n        \"mail\": \"arjonamiguel@gmail.com\"\r\n      }\r\n    ],\r\n    \"paymentMethod\" : {\r\n      \"type\" : \"CREDIT\",\r\n      \"number\": \"1234-1234-1234-1234\",\r\n      \"dues\" : 6\r\n    }\r\n\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/hotel-booking/new",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"hotel-booking",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createFlightReservation",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userName\" : \"arjonamiguel@gmail.com\",\r\n  \"flightReservation\": {\r\n    \"dateFrom\" : \"10/02/2022\",\r\n    \"dateTo\": \"17/02/2022\",\r\n    \"origin\": \"Buenos Aires\",\r\n    \"destination\": \"Tucumán\",\r\n    \"flightNumber\" : \"BATU-5536\",\r\n    \"seats\" : 2,\r\n    \"seatType\" : \"ECONOMY\",\r\n    \"people\" : [\r\n      {\r\n        \"dni\" : \"12345678\",\r\n        \"name\": \"Pepito\",\r\n        \"lastName\": \"Gomez\",\r\n        \"birthday\":\"10/11/1982\",\r\n        \"mail\": \"arjonamiguel@gmail.com\"\r\n      },\r\n      {\r\n        \"dni\" : \"12345578\",\r\n        \"name\": \"Pepito\",\r\n        \"lastName\": \"Gomez\",\r\n        \"birthday\":\"10/11/1982\",\r\n        \"mail\": \"arjonamiguel@gmail.com\"\r\n      }\r\n    ],\r\n    \"paymentMethod\" : {\r\n      \"type\" : \"CREDIT\",\r\n      \"number\": \"1234-1234-1234-1234\",\r\n      \"dues\" : 6\r\n    }\r\n\r\n  }\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/v1/flight-reservation/new",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"flight-reservation",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editHotelBooking",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/hotel-booking/edit?id=num_id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"hotel-booking",
+								"edit"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "num_id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editFlightBooking",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/flight-reservation/edit?id=num_id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"flight-reservation",
+								"edit"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "num_id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getHotelsBooking",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/hotel-booking",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"hotel-booking"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFlightsBooking",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/flight-reservation",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"flight-reservation"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteHotelBooking",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/hotel-booking/delete?id=num_id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"hotel-booking",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "num_id"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteFlightBooking",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/api/v1/flight-reservation/delete?id=num_id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"v1",
+								"flight-reservation",
+								"delete"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "num_id"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
