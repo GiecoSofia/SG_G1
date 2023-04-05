@@ -1,5 +1,5 @@
 package com.SG_G1.BootcampDH.utils;
-
+import com.SG_G1.BootcampDH.dto.FlightReservationModelDTO;
 import com.SG_G1.BootcampDH.dto.responsive.FlightReservationDTO;
 import com.SG_G1.BootcampDH.model.FlightReservationModel;
 import com.SG_G1.BootcampDH.model.PeopleModel;
@@ -12,10 +12,7 @@ public class DTOResponseFlightFactory {
 
     public static FlightReservationDTO DTOResponsive6() {
         return FlightReservationDTO.builder()
-                .userName("arjona@gmail.com")
-                .total(51240.0)
-                .flightReservation(flightReservation())
-                .status(StatusCodeDTO())
+                .flight_bookings(List.of(flightReservation()))
                 .build();
     }
 
@@ -26,8 +23,8 @@ public class DTOResponseFlightFactory {
                 .build();
     }
 
-    public static FlightReservationModel flightReservation(){
-        return FlightReservationModel.builder()
+    public static FlightReservationModelDTO flightReservation(){
+        return FlightReservationModelDTO.builder()
                 .dateFrom(LocalDate.parse("2022-02-10"))
                 .dateTo(LocalDate.parse("2022-02-17"))
                 .origin("Buenos Aires")

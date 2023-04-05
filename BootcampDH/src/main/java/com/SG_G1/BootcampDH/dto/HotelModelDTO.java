@@ -23,4 +23,9 @@ public class HotelModelDTO {
     private LocalDate to;
     private Boolean booking;
 
+    public HotelModelDTO(String hotelA, String buenosAires, LocalDate parse, LocalDate parse1, double v) {
+    }
+
+    public void setDescription(String nuevaDescripción) {
+    }
 }

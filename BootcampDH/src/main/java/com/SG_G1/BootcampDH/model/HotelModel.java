@@ -44,4 +44,17 @@ public class HotelModel {
 
     @Column(name= "booking")
     private Boolean booking;
+
+    public HotelModel(String s) {
+    }
+
+    public HotelModel(String hotelB, String buenosAires, LocalDate parse, LocalDate parse1, double v) {
+    }
+
+    public void setDescription(String descripciónActual) {
+    }
+
+    public String getDescription() {
+        return null;
+    }
 }

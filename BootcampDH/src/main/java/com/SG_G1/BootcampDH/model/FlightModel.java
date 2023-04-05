@@ -42,4 +42,6 @@ public class FlightModel {
     private LocalDate to;
 
 
+    public FlightModel(String aa123, LocalDate from, LocalDate to, String origin, String destination) {
+    }
 }

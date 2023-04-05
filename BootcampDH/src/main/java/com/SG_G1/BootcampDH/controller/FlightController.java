@@ -38,8 +38,6 @@ public class FlightController {
     @GetMapping("/")
     public ResponseEntity<List<FlightModelDTO>> getAll(){
 
-
-
         return ResponseEntity.ok(flightService.getAllEntities());
     }
 
